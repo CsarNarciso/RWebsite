@@ -1,0 +1,30 @@
+Seccion ¿Quiénes somos?
+REGAMSA MEDICAL es una empresa especializada en el diseño, fabricación e instalación de equipos y sistemas para el suministro de gases medicinales y equipamiento hospitalario. 
+
+Nuestro enfoque combina ingeniería especializada, manufactura de precisión y tecnología aplicada para desarrollar infraestructuras seguras, eficientes, y confiables para hospitales, laboratorios e instalaciones médicas
+
+Nuestra actividad abarca la manufactura, distribución e integración de soluciones electromecánicas para hospitales, laboratorios e industrias, incluyendo sistemas de oxígeno, aire, vacío y otros gases médicos.
+En REGAMSA, trabajamos con materiales de alta calidad y procesos de fabricación respaldados por tecnología especializada que garantizan precisión, seguridad y confiabilidad en cada proyecto.
+Nuestro compromiso es proporcionar soluciones que optimicen la operación hospitalaria y contribuyan a mejorar la infraestructura médica mediante sistemas robustos, eficientes y duraderos.
+
+Imagen "Quienes Somos"
+
+
+
+Seccion Producto Columna Cielitica Retráctil - Seccion Columnas Cieliticas
+Imagen "Columna Cielitica Retráctil" tipo encabezado presentacion
+Debajo texto principal:
+
+Un sistema suspendido para quirófano diseñado para centralizar servicios médicos, eléctricos y gases medicinales en un solo punto de acceso, optimizando la ergonomía y funcionalidad del entorno quirúrgico.
+
+Incorpora un sistema de elevación electromecánico de accionamiento lineal, desarrollado para sustituir los sistemas neumáticos convencionales, proporcionando un movimiento de alta precisión, operación silenciosa y mayor estabilidad durante su funcionamiento.
+
+La Columna Cielítica Retráctil de Regamsa representa una solución avanzada para hospitales y centros médicos que buscan combinar tecnología, eficiencia operativa y diseño arquitectónico contemporáneo dentro de sus áreas críticas.
+
+Debajo de texto principal: recuadro informativo de "Entornos de aplicación:", con contenido:
+icono ubicacion color regamsa oscuro + texto "Terapia Intensiva."
+icono ubicacion color regamsa oscuro + texto "Quirófanos."
+
+A un costado derecho de texto principal va imagen "Columna Cielitica Rectatil Acompañante texto principal"
+
+

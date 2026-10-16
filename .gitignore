@@ -1,0 +1,7 @@
+# Catálogo PDF (50 MB): se mantiene en local, no se sube al repo.
+# El sitio lo enlaza igual desde resources/catalogo/.
+resources/catalogo/*.pdf
+
+# Sistema
+.DS_Store
+Thumbs.db

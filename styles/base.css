@@ -186,6 +186,37 @@ strong {
     padding-left:12px;
 }
 
+.nav .brand,
+.nav-links a,
+.mobile-menu a {
+    position:relative;
+    overflow:hidden;
+}
+
+.nav-ink {
+    position:absolute;
+    z-index:1;
+    width:var(--ink-size);
+    height:var(--ink-size);
+    left:var(--ink-x);
+    top:var(--ink-y);
+    border-radius:50%;
+    background:var(--reg-claro);
+    pointer-events:none;
+    animation:nav-ink-ripple .65s ease-out forwards;
+}
+
+@keyframes nav-ink-ripple {
+    from {
+        transform:translate(-50%,-50%) scale(0);
+        opacity:.45;
+    }
+    to {
+        transform:translate(-50%,-50%) scale(1);
+        opacity:0;
+    }
+}
+
 .nav-actions {
     display:flex;
     align-items:center;
@@ -463,6 +494,10 @@ strong {
 }
 
 @media(prefers-reduced-motion:reduce) {
+    .nav-ink {
+        display:none;
+        animation:none;
+    }
     .nav-links::after {
         transition:none;
     }

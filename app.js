@@ -143,6 +143,33 @@
   var navLinks = document.getElementById("navLinks");
   var desktopLinks = Array.from(navLinks.querySelectorAll("a[href^='#']"));
   var headerLinks = desktopLinks.concat(Array.from(mobileMenu.querySelectorAll("a[href^='#']")));
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var inkLinks = [navbar.querySelector(".brand")].concat(headerLinks);
+
+  inkLinks.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      if (reducedMotion.matches) return;
+      var bounds = link.getBoundingClientRect();
+      var x = event.detail === 0 ? bounds.width / 2 : event.clientX - bounds.left;
+      var y = event.detail === 0 ? bounds.height / 2 : event.clientY - bounds.top;
+      var diameter = 2 * Math.hypot(Math.max(x, bounds.width - x), Math.max(y, bounds.height - y));
+      var ink = document.createElement("span");
+      ink.className = "nav-ink";
+      ink.setAttribute("aria-hidden", "true");
+      ink.style.setProperty("--ink-x", x + "px");
+      ink.style.setProperty("--ink-y", y + "px");
+      ink.style.setProperty("--ink-size", diameter + "px");
+      link.appendChild(ink);
+      var cleanupTimer = setTimeout(removeInk, 850);
+      function removeInk() {
+        clearTimeout(cleanupTimer);
+        ink.remove();
+      }
+      ink.addEventListener("animationend", removeInk, { once: true });
+      ink.addEventListener("animationcancel", removeInk, { once: true });
+    }, { capture: true });
+  });
+
   var navSections = desktopLinks.map(function (link) {
     return { link: link, section: document.getElementById(link.hash.slice(1)) };
   }).filter(function (item) { return item.section; });

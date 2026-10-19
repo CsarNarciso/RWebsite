@@ -1,15 +1,82 @@
-.about-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:42px;align-items:start}
-.lead{font-size:18px;color:#4c545c}
-.about-text p{margin:0 0 14px}
-.about-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px}
-.about-list li{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:12px 14px;font-size:14.5px;color:var(--gris-fuerte);font-weight:600}
-.about-list svg{width:21px;height:21px;flex:none;color:var(--reg-oscuro);margin-top:1px}
-.about-media .framed{margin:0}
-.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-.mini-card{border:1px solid var(--linea);border-radius:12px;background:linear-gradient(180deg,#fff,#f2faf9);padding:13px 10px;text-align:center}
-.mini-card strong{display:block;color:var(--gris-titulo);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
-.mini-card span{font-size:12.5px}
+.about-grid {
+    display:grid;
+    grid-template-columns:1.08fr .92fr;
+    gap:42px;
+    align-items:start
+}
+
+.lead {
+    font-size:18px;
+    color:#4c545c
+}
+
+.about-text p {
+    margin:0 0 14px
+}
+
+.about-list {
+    list-style:none;
+    margin:22px 0 0;
+    padding:0;
+    display:grid;
+    gap:10px
+}
+
+.about-list li {
+    display:flex;
+    gap:11px;
+    align-items:flex-start;
+    background:#fff;
+    border:1px solid var(--linea);
+    border-radius:12px;
+    padding:12px 14px;
+    font-size:14.5px;
+    color:var(--gris-fuerte);
+    font-weight:600
+}
+
+.about-list svg {
+    width:21px;
+    height:21px;
+    flex:none;
+    color:var(--reg-oscuro);
+    margin-top:1px
+}
+
+.about-media .framed {
+    margin:0
+}
+
+.mini-cards {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:12px
+}
+
+.mini-card {
+    border:1px solid var(--linea);
+    border-radius:12px;
+    background:linear-gradient(180deg,#fff,#f2faf9);
+    padding:13px 10px;
+    text-align:center
+}
+
+.mini-card strong {
+    display:block;
+    color:var(--gris-titulo);
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase
+}
+
+.mini-card span {
+    font-size:12.5px
+}
+
 /* RESPONSIVE */
-@media (max-width:960px){
-  .about-grid{grid-template-columns:1fr}
+@media (max-width:960px) {
+    .about-grid {
+        grid-template-columns:1fr
+    }
 }

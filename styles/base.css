@@ -342,9 +342,9 @@ strong {
 }
 
 .spec-label {
-    font-size:11.5px;
-    letter-spacing:.22em;
-    font-weight:800;
+    font-size:0.8rem;
+    letter-spacing:.2em;
+    font-weight:bold;
     color:var(--reg-oscuro);
     margin:0 0 12px
 }

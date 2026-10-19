@@ -61,7 +61,7 @@
     if (!items.length) {
       var li = document.createElement("li");
       li.className = "drawer-empty";
-      li.textContent = "Tu lista está vacía. Agrega la Columna Cielítica Retráctil.";
+      li.textContent = "Tu carrito se encuentra vacio";
       quoteList.appendChild(li);
     } else {
       items.forEach(function (name, i) {

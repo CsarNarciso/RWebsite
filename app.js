@@ -1,5 +1,31 @@
-// REGAMSA MEDICAL — interacciones del concepto (sin framework)
-(function () {
+// REGAMSA MEDICAL — concept interactions (no framework)
+(async function () {
+  var sections = Array.from(document.querySelectorAll("template[data-src]"));
+
+  try {
+    var content = await Promise.all(sections.map(async function (section) {
+      var response = await fetch(section.dataset.src);
+      if (!response.ok) {
+        throw new Error("Unable to load " + section.dataset.src + ": " + response.status);
+      }
+      return response.text();
+    }));
+
+    sections.forEach(function (section, index) {
+      var template = document.createElement("template");
+      template.innerHTML = content[index];
+      section.replaceWith(template.content);
+    });
+  } catch (error) {
+    console.error("Unable to load page sections.", error);
+    var message = document.createElement("p");
+    message.className = "wrap";
+    message.setAttribute("role", "alert");
+    message.textContent = "No se pudo cargar el contenido. Por favor, recarga la página.";
+    document.getElementById("inicio").replaceChildren(message);
+    return;
+  }
+
   var navbar = document.getElementById("navbar");
   var navToggle = document.getElementById("navToggle");
   var mobileMenu = document.getElementById("mobileMenu");
@@ -102,7 +128,7 @@
     document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
   });
 
-  // Menú móvil
+  // Mobile menu
   navToggle.addEventListener("click", function () {
     var open = mobileMenu.classList.toggle("open");
     navToggle.setAttribute("aria-expanded", open ? "true" : "false");
@@ -114,12 +140,12 @@
     });
   });
 
-  // Sombra del navbar
+  // Navbar shadow
   window.addEventListener("scroll", function () {
     navbar.classList.toggle("scrolled", window.scrollY > 8);
   }, { passive: true });
 
-  // Formulario concepto (sin backend)
+  // Concept form (no backend)
   document.getElementById("quoteForm").addEventListener("submit", function (e) {
     e.preventDefault();
     var ok = document.getElementById("formOk");
@@ -130,4 +156,9 @@
 
   document.getElementById("year").textContent = String(new Date().getFullYear());
   render();
+
+  if (window.location.hash) {
+    var target = document.getElementById(window.location.hash.slice(1));
+    if (target) target.scrollIntoView();
+  }
 })();

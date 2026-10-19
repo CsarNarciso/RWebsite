@@ -10,6 +10,7 @@
     inset:0;
     pointer-events:none;
     opacity:.9;
+    animation:hero-reveal .8s ease-out both;
     background:repeating-linear-gradient(180deg,transparent 0 46px,rgba(10,128,138,.06) 46px 47px);
 }
 
@@ -46,23 +47,36 @@
 
 .hero-title h1 {
     font-family:var(--font);
-    font-weight:bold;
-    font-size:3rem;
-    text-align: center;
+    font-weight:700;
+    font-size:clamp(32px,3.8vw,50px);
+    line-height:1.12;
+    letter-spacing:.01em;
+    text-align:left;
+    text-wrap:balance;
     animation:fold 1.55s both cubic-bezier(.2, .9, .25, 1);
     transform-origin:left;
-    margin:35px 0;
+    margin:0 0 18px;
 }
+
 .hero-title h2 {
-    color: blue;
-    font-size: 2rem;
-    text-align: center;
+    font-family:var(--font);
+    color:var(--reg-oscuro);
+    font-size:clamp(20px,2vw,25px);
+    font-weight:600;
+    line-height:1.35;
+    letter-spacing:.025em;
+    text-align:left;
+    margin:0 0 20px;
+    animation:fade .55s .18s both;
 }
 
 .hero-sub {
-    font-size: 18px;
-    max-width: 52ch;
-    margin: 18px 0 20px;
+    font-size:17px;
+    line-height:1.8;
+    color:#55616b;
+    max-width:56ch;
+    text-wrap:pretty;
+    margin:0 0 26px;
     animation: fade .4s .3s both;
 }
 
@@ -70,13 +84,15 @@
     display:flex;
     flex-wrap:wrap;
     gap:9px;
-    margin-bottom:24px
+    margin-bottom:24px;
+    animation:fade .6s .45s both;
 }
 
 .hero-cta {
     display:flex;
     gap:12px;
-    flex-wrap:wrap
+    flex-wrap:wrap;
+    animation:fade .6s .6s both;
 }
 
 .hero-note {
@@ -102,6 +118,7 @@
     position:absolute;
     inset:-10% -8%;
     z-index:0;
+    animation:hero-reveal .8s .2s both;
     pointer-events:none;
 }
 
@@ -300,6 +317,12 @@
 }
 
 /* ANIMATIONS */
+@keyframes hero-reveal {
+    from {
+        opacity:0;
+    }
+}
+
 @keyframes blob-morph  {
     0%    {
         border-radius:60% 40% 55% 45%/50% 55% 45% 50%
@@ -382,6 +405,9 @@
 }
 
 @media(prefers-reduced-motion:reduce) {
+    .hero-title h2,.hero-tags,.hero-cta,.hero-rules,.blob-stage {
+        animation:none!important
+    }
     .fold * {
         animation:none!important
     }

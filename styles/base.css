@@ -92,6 +92,7 @@ strong {
 }
 
 .brand img {
+    height: 70px;
     margin-block: 10px;
 }
 
@@ -145,7 +146,7 @@ strong {
 .nav-links a {
     color:var(--gris-texto);
     text-decoration:none;
-    font-size:14.5px;
+    font-size:1.2rem;
     font-weight:600;
     letter-spacing:.02em
 }

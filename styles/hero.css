@@ -143,11 +143,12 @@
 
 /* ---- blue-aqua line running along the sides ---- */
 .blob-edge {
+    --edge-shine-height:22%;
     position:absolute;
-    top:5%;
-    bottom:5%;
+    top:0;
+    bottom:0;
     width:3px;
-    z-index:1;
+    z-index:3;
     border-radius:99px;
     pointer-events:none;
     opacity:.78;
@@ -155,11 +156,11 @@
 }
 
 .edge-l {
-    left:-12px
+    left:-1.5px
 }
 
 .edge-r {
-    right:-12px
+    right:-1.5px
 }
 
 .blob-edge::after {
@@ -167,8 +168,8 @@
     position:absolute;
     left:50%;
     top:0;
-    width:6px;
-    height:18%;
+    width:8px;
+    height:var(--edge-shine-height);
     transform:translateX(-50%);
     border-radius:99px;
     background:linear-gradient(180deg,transparent,var(--reg-claro) 30%,#ffffff 58%,transparent);
@@ -327,7 +328,7 @@
 
 @keyframes edge-run  {
     0%    {
-        top:-24%;
+        top:0;
         opacity:0
     }
     14%   {
@@ -337,7 +338,7 @@
         opacity:1
     }
     100%  {
-        top:104%;
+        top:calc(100% - var(--edge-shine-height));
         opacity:0
     }
 }

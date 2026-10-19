@@ -44,16 +44,19 @@
     background:linear-gradient(135deg,var(--reg-claro),var(--reg-oscuro))
 }
 
-.hero-copy h1  {
-    font-family: Arial, Helvetica, sans-serif;
-    letter-spacing:.04em;
-    font-weight:800;
+.hero-title h1 {
+    font-family:var(--font);
+    font-weight:bold;
+    font-size:3rem;
+    text-align: center;
     animation:fold 1.55s both cubic-bezier(.2, .9, .25, 1);
-    transform-origin: left;
-    font-size: clamp(50px,8vw,85px);
-    line-height:.82;
-    letter-spacing:-.09em;
-    margin:35px 0px;
+    transform-origin:left;
+    margin:35px 0;
+}
+.hero-title h2 {
+    color: blue;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .hero-sub {
@@ -152,6 +155,7 @@
     border-radius:99px;
     pointer-events:none;
     opacity:.78;
+    animation:edge-reveal .65s .8s ease-out both;
     background:linear-gradient(180deg, transparent,var(--reg-azul) 16%, var(--reg-oscuro) 50%, var(--reg-claro) 84%,transparent);
 }
 
@@ -326,6 +330,15 @@
     }
 }
 
+@keyframes edge-reveal {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:.78;
+    }
+}
+
 @keyframes edge-run  {
     0%    {
         top:0;
@@ -372,7 +385,7 @@
     .fold * {
         animation:none!important
     }
-    .blob,.blob-edge::after {
+    .blob,.blob-edge,.blob-edge::after {
         animation:none!important
     }
     .blob-edge::after {

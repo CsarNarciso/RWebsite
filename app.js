@@ -1,31 +1,5 @@
 // REGAMSA MEDICAL — concept interactions (no framework)
-(async function () {
-  var sections = Array.from(document.querySelectorAll("template[data-src]"));
-
-  try {
-    var content = await Promise.all(sections.map(async function (section) {
-      var response = await fetch(section.dataset.src);
-      if (!response.ok) {
-        throw new Error("Unable to load " + section.dataset.src + ": " + response.status);
-      }
-      return response.text();
-    }));
-
-    sections.forEach(function (section, index) {
-      var template = document.createElement("template");
-      template.innerHTML = content[index];
-      section.replaceWith(template.content);
-    });
-  } catch (error) {
-    console.error("Unable to load page sections.", error);
-    var message = document.createElement("p");
-    message.className = "wrap";
-    message.setAttribute("role", "alert");
-    message.textContent = "No se pudo cargar el contenido. Por favor, recarga la página.";
-    document.getElementById("inicio").replaceChildren(message);
-    return;
-  }
-
+(function () {
   var navbar = document.getElementById("navbar");
   var navToggle = document.getElementById("navToggle");
   var mobileMenu = document.getElementById("mobileMenu");

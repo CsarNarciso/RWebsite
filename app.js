@@ -1,16 +1,19 @@
 // REGAMSA MEDICAL — concept interactions (no framework)
 (function () {
-  var navbar = document.getElementById("navbar");
-  var navToggle = document.getElementById("navToggle");
-  var mobileMenu = document.getElementById("mobileMenu");
+  var KEY = "regamsa_quote_v1";
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var catalogViewOpen = false;
+
+  // =========================================================
+  // QUOTE CART (localStorage)
+  // =========================================================
   var drawer = document.getElementById("quoteDrawer");
   var backdrop = document.getElementById("drawerBackdrop");
   var quoteList = document.getElementById("quoteList");
   var quoteCount = document.getElementById("quoteCount");
   var formProducts = document.getElementById("formProducts");
   var toast = document.getElementById("toast");
-
-  var KEY = "regamsa_quote_v1";
+  var toastTimer = null;
 
   function load() {
     try { return JSON.parse(localStorage.getItem(KEY)) || []; }
@@ -19,18 +22,16 @@
   function save(items) {
     try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {}
   }
-
-  var toastTimer = null;
   function showToast(msg) {
+    if (!toast) return;
     toast.textContent = msg;
     toast.hidden = false;
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { toast.hidden = true; }, 2600);
   }
-
   function render() {
     var items = load();
-    quoteCount.textContent = String(items.length);
+    if (quoteCount) quoteCount.textContent = String(items.length);
     quoteList.innerHTML = "";
     if (!items.length) {
       var li = document.createElement("li");
@@ -58,7 +59,6 @@
     }
     if (formProducts) formProducts.value = items.join(" · ");
   }
-
   function openDrawer() {
     render();
     drawer.classList.add("open");
@@ -71,20 +71,22 @@
     backdrop.hidden = true;
   }
 
-  document.querySelectorAll("[data-add-quote]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var name = btn.getAttribute("data-add-quote");
-      var items = load();
-      if (items.indexOf(name) === -1) {
-        items.push(name);
-        save(items);
-        showToast("Agregado a tu lista de cotización");
-      } else {
-        showToast("Ya está en tu lista");
-      }
-      render();
-      openDrawer();
-    });
+  // Delegated: works for static and dynamically rendered product cards
+  document.addEventListener("click", function (event) {
+    var target = event.target;
+    var btn = target && target.closest ? target.closest("[data-add-quote]") : null;
+    if (!btn) return;
+    var name = btn.getAttribute("data-add-quote");
+    var items = load();
+    if (items.indexOf(name) === -1) {
+      items.push(name);
+      save(items);
+      showToast("Agregado a tu lista de cotización");
+    } else {
+      showToast("Ya está en tu lista");
+    }
+    render();
+    openDrawer();
   });
 
   document.getElementById("openQuote").addEventListener("click", openDrawer);
@@ -99,10 +101,16 @@
 
   document.getElementById("goContact").addEventListener("click", function () {
     closeDrawer();
-    document.getElementById("contacto").scrollIntoView({ behavior: "smooth" });
+    closeSectionView();
+    var contact = document.getElementById("contacto");
+    if (contact) contact.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth" });
   });
 
-  // Mobile menu
+  // =========================================================
+  // MOBILE MENU
+  // =========================================================
+  var navToggle = document.getElementById("navToggle");
+  var mobileMenu = document.getElementById("mobileMenu");
   navToggle.addEventListener("click", function () {
     var open = mobileMenu.classList.toggle("open");
     navToggle.setAttribute("aria-expanded", open ? "true" : "false");
@@ -114,10 +122,13 @@
     });
   });
 
+  // =========================================================
+  // NAV — ink ripple + scroll spy
+  // =========================================================
+  var navbar = document.getElementById("navbar");
   var navLinks = document.getElementById("navLinks");
   var desktopLinks = Array.from(navLinks.querySelectorAll("a[href^='#']"));
   var headerLinks = desktopLinks.concat(Array.from(mobileMenu.querySelectorAll("a[href^='#']")));
-  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var inkLinks = [navbar.querySelector(".brand")].concat(headerLinks);
 
   inkLinks.forEach(function (link) {
@@ -168,6 +179,16 @@
   function updateNavSection() {
     navFrame = null;
     navbar.classList.toggle("scrolled", window.scrollY > 8);
+    var catalogLink = document.querySelector('.nav-links a[href="#catalogo"]');
+    if (catalogViewOpen) {
+      activeLink = catalogLink;
+      headerLinks.forEach(function (link) {
+        if (link.hash === "#catalogo") link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+      positionNavLine();
+      return;
+    }
     var threshold = navbar.querySelector(".nav-inner").getBoundingClientRect().height + Math.min(160, window.innerHeight * .2);
     var current = null;
     navSections.forEach(function (item) {
@@ -207,9 +228,233 @@
   navResizeObserver.observe(document.getElementById("inicio"));
   navResizeObserver.observe(navbar.querySelector(".nav-inner"));
   if (document.fonts) document.fonts.ready.then(scheduleNavUpdate);
-  updateNavSection();
 
-  // Concept form (no backend)
+  // =========================================================
+  // CATALOG — section data
+  // =========================================================
+  var SECTION_IDS = ["columnas-cieliticas", "paneles"];
+
+  // =========================================================
+  // VIEW ROUTER (separate catalog views via hash)
+  // =========================================================
+  var homeMain = document.getElementById("inicio");
+  var viewRoot = document.getElementById("catalogViews");
+  var currentViewId = null;
+  var rotatorApi = null;
+
+  function getRoute() {
+    var clean = (window.location.hash || "").replace(/^#\/?/, "");
+    if (clean.indexOf("catalogo/") === 0) {
+      var id = clean.slice("catalogo/".length);
+      if (SECTION_IDS.indexOf(id) !== -1) return { view: id };
+    }
+    return { view: null, anchor: clean || null };
+  }
+
+  function openSectionView(id) {
+    var view = document.getElementById("view-" + id);
+    if (!view) { closeSectionView(); return; }
+    homeMain.classList.add("is-hidden");
+    viewRoot.hidden = false;
+    viewRoot.classList.add("is-open");
+    Array.prototype.forEach.call(viewRoot.children, function (child) {
+      child.classList.toggle("is-active", child === view);
+    });
+    catalogViewOpen = true;
+    currentViewId = id;
+    if (rotatorApi) rotatorApi.stop();
+    window.scrollTo({ top: 0, behavior: "auto" });
+    updateNavSection();
+    document.title = view.getAttribute("data-title") + " · REGAMSA Medical";
+  }
+
+  function closeSectionView() {
+    if (currentViewId) {
+      viewRoot.hidden = true;
+      viewRoot.classList.remove("is-open");
+      Array.prototype.forEach.call(viewRoot.children, function (child) {
+        child.classList.remove("is-active");
+      });
+      homeMain.classList.remove("is-hidden");
+      catalogViewOpen = false;
+      currentViewId = null;
+      document.title = "Regamsa Medical";
+      if (rotatorApi) rotatorApi.start();
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+    updateNavSection();
+  }
+
+  function applyRoute() {
+    var route = getRoute();
+    if (route.view) {
+      openSectionView(route.view);
+    } else {
+      closeSectionView();
+      if (route.anchor) {
+        var el = document.getElementById(route.anchor);
+        if (el) el.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
+      }
+    }
+  }
+  window.addEventListener("hashchange", applyRoute);
+
+  // =========================================================
+  // CATALOG — 3D section carousel
+  // =========================================================
+  var rotator = document.getElementById("sectionRotator");
+  if (rotator) {
+    var rotatorViewport = document.getElementById("rotatorViewport");
+    var rotatorTrack = document.getElementById("rotatorTrack");
+    var rotatorCards = Array.from(rotatorTrack.children);
+    var rotatorDots = document.getElementById("rotatorDots");
+    var rotatorPrev = document.getElementById("rotatorPrev");
+    var rotatorNext = document.getElementById("rotatorNext");
+    var rotatorPause = document.getElementById("rotatorPause");
+    var rotatorIndex = 0;
+    var rotatorTimer = null;
+    var rotatorPaused = false;
+    var rotatorHovered = false;
+    var dotButtons = [];
+    var total = rotatorCards.length;
+
+    rotatorCards.forEach(function (card, i) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", "Mostrar " + card.querySelector(".rotator-title").textContent);
+      button.addEventListener("click", function () { goToSection(i); });
+      rotatorDots.appendChild(button);
+      dotButtons.push(button);
+    });
+
+    function setRotatorActive(i) {
+      rotatorIndex = i;
+      rotatorCards.forEach(function (card, index) {
+        var offset = index - i;
+        if (total > 1) {
+          if (offset > total / 2) offset -= total;
+          else if (offset < -total / 2) offset += total;
+        }
+        var abs = Math.abs(offset);
+        card.style.setProperty("--rot-offset", String(offset));
+        card.style.setProperty("--rot-abs", String(abs));
+        card.classList.toggle("is-active", abs === 0);
+        card.style.zIndex = String(total - abs);
+        if (abs === 0) {
+          card.removeAttribute("aria-hidden");
+          card.removeAttribute("tabindex");
+        } else {
+          card.setAttribute("aria-hidden", "true");
+          card.setAttribute("tabindex", "-1");
+        }
+      });
+      dotButtons.forEach(function (button, index) {
+        if (index === i) button.setAttribute("aria-current", "true");
+        else button.removeAttribute("aria-current");
+      });
+    }
+
+    function goToSection(i) {
+      if (!total) return;
+      setRotatorActive(((i % total) + total) % total);
+    }
+
+    function stopRotator() {
+      if (rotatorTimer !== null) {
+        clearInterval(rotatorTimer);
+        rotatorTimer = null;
+      }
+    }
+
+    function startRotator() {
+      stopRotator();
+      if (rotatorPaused || rotatorHovered || reducedMotion.matches || total < 2 || document.hidden) return;
+      rotatorTimer = setInterval(function () {
+        goToSection(rotatorIndex + 1);
+      }, 6500);
+    }
+
+    rotatorApi = { stop: stopRotator, start: startRotator, go: goToSection };
+
+    rotatorPrev.addEventListener("click", function () { goToSection(rotatorIndex - 1); });
+    rotatorNext.addEventListener("click", function () { goToSection(rotatorIndex + 1); });
+
+    rotatorPause.addEventListener("click", function () {
+      rotatorPaused = !rotatorPaused;
+      rotatorPause.setAttribute("aria-pressed", rotatorPaused ? "true" : "false");
+      rotatorPause.textContent = rotatorPaused ? "Reanudar" : "Pausar";
+      if (rotatorPaused) stopRotator();
+      else startRotator();
+    });
+
+    rotator.addEventListener("mouseenter", function () { rotatorHovered = true; stopRotator(); });
+    rotator.addEventListener("mouseleave", function () { rotatorHovered = false; startRotator(); });
+    rotator.addEventListener("focusin", function () { rotatorHovered = true; stopRotator(); });
+    rotator.addEventListener("focusout", function () {
+      setTimeout(function () {
+        if (!rotator.contains(document.activeElement)) {
+          rotatorHovered = false;
+          startRotator();
+        }
+      }, 0);
+    });
+    rotator.addEventListener("touchstart", function () { rotatorHovered = true; stopRotator(); }, { passive: true });
+    rotator.addEventListener("touchend", function () { rotatorHovered = false; startRotator(); }, { passive: true });
+    rotator.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goToSection(rotatorIndex - 1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goToSection(rotatorIndex + 1);
+      }
+    });
+
+    var touchStartX = null;
+    var touchStartY = null;
+    var touchMoved = false;
+    rotatorViewport.addEventListener("touchstart", function (event) {
+      var touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchMoved = false;
+    }, { passive: true });
+    rotatorViewport.addEventListener("touchmove", function (event) {
+      if (touchStartX === null) return;
+      var touch = event.changedTouches[0];
+      var dx = touch.clientX - touchStartX;
+      var dy = touch.clientY - touchStartY;
+      if (Math.abs(dx) > 24 && Math.abs(dx) > Math.abs(dy)) touchMoved = true;
+    }, { passive: true });
+    rotatorViewport.addEventListener("touchend", function (event) {
+      if (touchStartX === null) return;
+      var touch = event.changedTouches[0];
+      var dx = touch.clientX - touchStartX;
+      if (touchMoved && Math.abs(dx) > 40) {
+        goToSection(rotatorIndex + (dx < 0 ? 1 : -1));
+      }
+      touchStartX = null;
+      setTimeout(function () { touchMoved = false; }, 400);
+    }, { passive: true });
+    rotatorViewport.addEventListener("click", function (event) {
+      if (!touchMoved) return;
+      event.preventDefault();
+      event.stopPropagation();
+      touchMoved = false;
+    }, true);
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopRotator();
+      else startRotator();
+    });
+
+    setRotatorActive(0);
+    startRotator();
+  }
+
+  // =========================================================
+  // CONCEPT FORM + BOOT
+  // =========================================================
   document.getElementById("quoteForm").addEventListener("submit", function (e) {
     e.preventDefault();
     var ok = document.getElementById("formOk");
@@ -220,9 +465,6 @@
 
   document.getElementById("year").textContent = String(new Date().getFullYear());
   render();
-
-  if (window.location.hash) {
-    var target = document.getElementById(window.location.hash.slice(1));
-    if (target) target.scrollIntoView();
-  }
+  updateNavSection();
+  applyRoute();
 })();

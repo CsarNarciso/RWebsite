@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Regamsa Medical</title>
   <meta name="description" content="REGAMSA MEDICAL: diseño, fabricación e instalación de equipos y sistemas para gases medicinales y equipamiento hospitalario." />
-  <link rel="stylesheet" href="./styles/base.css?v=nav-ink-1"/>
+  <link rel="icon" type="image/png" href="resources/images/regamsa_logo.png" />
+  <link rel="stylesheet" href="./styles/base.css?v=3d-catalog-1"/>
   <link rel="stylesheet" href="./styles/hero.css"/>
   <link rel="stylesheet" href="./styles/about.css"/>
   <link rel="stylesheet" href="./styles/products.css"/>
   <link rel="stylesheet" href="./styles/paneles.css"/>
+  <link rel="stylesheet" href="./styles/catalogo.css?v=3d-catalog-1"/>
   <link rel="stylesheet" href="./styles/experience.css"/>
   <link rel="stylesheet" href="./styles/quotation.css"/>
   <link rel="stylesheet" href="./styles/shared.css"/>
@@ -26,8 +28,7 @@
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Secciones">
         <a href="#quienes-somos">Quiénes somos</a>
-        <a href="#producto">Productos</a>
-        <a href="#paneles">Paneles</a>
+        <a href="#catalogo">Catálogo</a>
         <a href="#experiencia">Experiencia</a>
         <a href="#contacto">Contacto</a>
       </nav>
@@ -43,8 +44,7 @@
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <a href="#quienes-somos">Quiénes somos</a>
-      <a href="#producto">Productos</a>
-      <a href="#paneles">Paneles</a>
+      <a href="#catalogo">Catálogo</a>
       <a href="#experiencia">Experiencia</a>
       <a href="#contacto">Contacto</a>
     </div>
@@ -63,7 +63,7 @@
             En Regamsa Medical, ofrecemos <strong>productos de alta calidad</strong> a precios justos, respaldados por años de experiencia en la industria. Nos esforzamos constantemente por mejorar nuestros productos y servicios para brindar la mejor experiencia posible a nuestros clientes. Ya sea que necesites una compra única o quieras comprar al por mayor, encontrarás excelentes productos y servicio excepcional. Explora nuestro inventario y contáctanos si necesitas ayuda.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="#producto">Conoce nuestros productos</a>
+            <a class="btn btn-primary" href="#catalogo">Explora el catálogo por secciones</a>
             <a class="btn btn-ghost" href="#quienes-somos">Quiénes somos</a>
           </div>
         </div>
@@ -150,222 +150,67 @@
       </div>
     </section>
 
-    <!-- ============ PRODUCTS ============ -->
-    <section class="section section-soft" id="producto">
+    <!-- ============ CATALOG INDEX ============ -->
+    <section class="section catalog-index" id="catalogo">
       <div class="wrap">
-        <p class="section-label">02 — Columnas cielíticas</p>
-        <h2 class="section-title">CONOCE NUESTROS PRODUCTOS</h2>
+        <p class="section-label">Catálogo 2026</p>
+        <h2 class="section-title">CATÁLOGO POR SECCIONES</h2>
         <div class="title-rule"><span></span></div>
         <p class="section-intro">
-          Sistema suspendido para quirófano que centraliza servicios médicos, eléctricos y
-          gases medicinales en un solo punto de acceso.
+          Gira el carrusel o usa las flechas. Selecciona una sección para abrir su catálogo
+          y conocer todos sus productos.
         </p>
 
-        <!-- Product cover -->
-        <figure class="product-cover framed">
-          <img src="resources/images/Portada%20Seccion%20Producto%20Columnas%20Cieliticas.png" alt="Portada sección columnas cielíticas REGAMSA" />
-          <span class="cover-tag">COLUMNAS CIELÍTICAS · QUIRÓFANO</span>
-        </figure>
+        <div class="section-rotator" id="sectionRotator" role="region" aria-roledescription="carrusel" aria-label="Secciones del catálogo">
+          <div class="rotator-viewport" id="rotatorViewport">
+            <div class="rotator-track" id="rotatorTrack">
+              <a class="rotator-card is-active" href="#catalogo/columnas-cieliticas" data-section="columnas-cieliticas">
+                <span class="rotator-info">
+                  <span class="rotator-index">02</span>
+                  <span class="rotator-kicker">Línea de producto</span>
+                  <span class="rotator-title">COLUMNAS CIELÍTICAS</span>
+                  <span class="rotator-desc">Sistemas suspendidos para quirófano que centralizan servicios médicos, eléctricos y gases medicinales.</span>
+                  <span class="rotator-count">1 referencia en catálogo</span>
+                  <span class="rotator-cta">
+                    Ver catálogo
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </span>
+                <span class="rotator-media">
+                  <img loading="lazy" src="resources/images/Portada%20Seccion%20Producto%20Columnas%20Cieliticas.png" alt="Columna cielítica REGAMSA en quirófano" />
+                </span>
+              </a>
 
-        <div class="product-grid">
-          <div class="product-main">
-            <figure class="framed">
-              <img src="resources/images/Columna%20Cielitica%20Retr%C3%A1ctil.png" alt="Columna cielítica retráctil REGAMSA" />
-            </figure>
+              <a class="rotator-card" href="#catalogo/paneles" data-section="paneles">
+                <span class="rotator-info">
+                  <span class="rotator-index">03</span>
+                  <span class="rotator-kicker">Línea de producto</span>
+                  <span class="rotator-title">PANELES</span>
+                  <span class="rotator-desc">Paneles hospitalarios modulares que integran servicios clínicos, gases medicinales y electricidad.</span>
+                  <span class="rotator-count">1 referencia en catálogo</span>
+                  <span class="rotator-cta">
+                    Ver catálogo
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </span>
+                <span class="rotator-media">
+                  <img loading="lazy" src="resources/images/Portada%20Seccion%20Producto%20Paneles.png" alt="Paneles hospitalarios REGAMSA en habitación" />
+                </span>
+              </a>
+            </div>
+          </div>
 
-            <h3 class="product-h3">SISTEMA SUSPENDIDO PARA QUIRÓFANO</h3>
-            <p>
-              Un sistema suspendido para quirófano diseñado para centralizar servicios médicos,
-              eléctricos y gases medicinales en un solo punto de acceso, optimizando la
-              <strong>ergonomía y funcionalidad</strong> del entorno quirúrgico.
-            </p>
-            <p>
-              Incorpora un sistema de elevación electromecánico de accionamiento lineal,
-              desarrollado para sustituir los sistemas neumáticos convencionales, proporcionando
-              un <strong>movimiento de alta precisión</strong>, operación silenciosa y mayor
-              estabilidad durante su funcionamiento.
-            </p>
-            <p>
-              La Columna Cielítica Retráctil de Regamsa representa una solución avanzada para
-              hospitales y centros médicos que buscan combinar tecnología, eficiencia operativa
-              y diseño arquitectónico contemporáneo dentro de sus áreas críticas.
-            </p>
-
-            <aside class="app-box">
-              <p class="app-title">Entornos de aplicación:</p>
-              <ul>
-                <li>
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
-                  Terapia Intensiva.
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
-                  Quirófanos.
-                </li>
-              </ul>
-            </aside>
-
-            <div class="product-cta">
-              <button class="btn btn-primary" type="button" data-add-quote="Columna Cielítica Retráctil">
-                Agregar a lista de cotización
+          <div class="rotator-controls">
+            <div class="rotator-dots" id="rotatorDots" aria-label="Seleccionar sección del catálogo"></div>
+            <div class="rotator-actions">
+              <button class="rotator-pause" id="rotatorPause" type="button" aria-pressed="false">Pausar</button>
+              <button class="rotator-arrow" id="rotatorPrev" type="button" aria-label="Sección anterior">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
-              <a class="btn btn-ghost" href="#contacto">Solicitar información</a>
+              <button class="rotator-arrow" id="rotatorNext" type="button" aria-label="Sección siguiente">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
-            <p class="red-note">¿Proyecto hospitalario en curso? <strong>Escríbenos</strong> — respondemos por contacto directo.</p>
-          </div>
-
-          <aside class="product-side">
-            <figure class="framed">
-              <img src="resources/images/Columna%20Cielitica%20Rectatil%20Acompa%C3%B1ante%20texto%20principal.png" alt="Detalle de columna cielítica retráctil junto a texto descriptivo" />
-              <figcaption>Detalle · accionamiento lineal electromecánico</figcaption>
-            </figure>
-            <div class="spec-card">
-              <p class="spec-label">FICHA RESUMEN</p>
-              <ul>
-                <li><span>Tipo</span><strong>Columna suspendida retráctil</strong></li>
-                <li><span>Uso</span><strong>Quirófano / Terapia intensiva</strong></li>
-                <li><span>Servicios</span><strong>Gases, electricidad, datos</strong></li>
-                <li><span>Elevación</span><strong>Electromecánica lineal</strong></li>
-                <li><span>Operación</span><strong>Silenciosa y estable</strong></li>
-              </ul>
-              <button class="btn btn-dark" type="button" data-add-quote="Columna Cielítica Retráctil">Añadir a cotización</button>
-              <small>Sin precios en línea · cotización por contacto directo.</small>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PANELES ============ -->
-    <section class="section" id="paneles">
-      <div class="wrap">
-        <p class="section-label">03 — Línea de producto</p>
-        <h2 class="section-title">PANELES</h2>
-        <div class="title-rule"><span></span></div>
-
-        <figure class="paneles-cover framed">
-          <img src="resources/images/Portada%20Seccion%20Producto%20Paneles.png" alt="Paneles hospitalarios REGAMSA en entorno de atención médica" />
-        </figure>
-
-        <p class="section-intro paneles-intro">
-          Los paneles hospitalarios representan una solución integral diseñada para optimizar la
-          funcionalidad, seguridad y organización de los servicios clínicos en áreas de atención
-          médica. Desarrollados para integrarse arquitectónicamente al entorno hospitalario, estos
-          sistemas concentran de manera eficiente los servicios esenciales requeridos para la
-          atención del paciente, mejorando la accesibilidad del personal médico y la operación clínica.
-        </p>
-
-        <div class="mod-banner">
-          <div class="mod-head">
-            <p class="mod-label">SISTEMA MODULAR</p>
-            <h3>SU DISEÑO MODULAR<br />PERMITE INTEGRAR</h3>
-          </div>
-          <div class="mod-cols">
-            <ul class="mod-list">
-              <li>
-                <span class="mod-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v5M15 3v5"/><path d="M6 8h12v3a6 6 0 0 1-6 6 6 6 0 0 1-6-6z"/><path d="M12 17v4"/></svg>
-                </span>
-                Contactos eléctricos grado hospitalarios.
-              </li>
-              <li>
-                <span class="mod-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="2"/><circle cx="9" cy="10" r="1.6"/><circle cx="15" cy="10" r="1.6"/><path d="M12 16v5M8 21h8"/></svg>
-                </span>
-                Tomas de gases medicinales.
-              </li>
-              <li>
-                <span class="mod-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10M6 13h12M8.5 17h7M11 21h2"/></svg>
-                </span>
-                Jacks de tierra física.
-              </li>
-            </ul>
-            <ul class="mod-list">
-              <li>
-                <span class="mod-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg>
-                </span>
-                Iluminación integrada
-              </li>
-              <li>
-                <span class="mod-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>
-                </span>
-                Accesorios clínicos.
-              </li>
-              <li>
-                <span class="mod-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 6.6a5 5 0 0 0-7.1 0L12 8.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 22l8.8-8.3a5 5 0 0 0 0-7.1z"/></svg>
-                </span>
-                Enfermera-Paciente.
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="paneles-after">
-          Además de su alto desempeño funcional, los paneles aportan una estética moderna y uniforme
-          que contribuye a elevar la calidad visual y tecnológica del entorno hospitalario.
-        </p>
-
-        <!-- Producto PNL-1000 -->
-        <div class="pnl-block" id="pnl-1000">
-          <div class="pnl-head">
-            <h3 class="pnl-code">PNL-1000</h3>
-            <p class="pnl-sub">Panel o Pared Hospitalaria</p>
-          </div>
-
-          <figure class="pnl-cover framed">
-            <img src="resources/images/Panel%20PNL-1000.png" alt="Panel hospitalario PNL-1000 instalado en habitación de hospital" />
-          </figure>
-
-          <div class="pnl-grid">
-            <div class="pnl-main">
-              <div class="app-box app-box-light">
-                <p class="app-title">Entornos de aplicación:</p>
-                <ul class="app-inline">
-                  <li>
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
-                    Terapia Intensiva
-                  </li>
-                  <li>
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
-                    Terapia Intermedia
-                  </li>
-                  <li>
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
-                    Urgencias
-                  </li>
-                </ul>
-              </div>
-
-              <p>
-                <strong>En cumplimiento con</strong> los criterios de ingeniería hospitalaria
-                establecidos en las <strong>Normas IMSS de Instalaciones Hidrosanitarias y
-                Especiales</strong>, así como los lineamientos de la <strong>NOM-025-SSA3-2013</strong>
-                para Unidades de Cuidados Intensivos.
-              </p>
-              <p>
-                Los paneles integran válvulas independientes de seccionamiento para cada salida de
-                gas medicinal, proporcionando mayor seguridad operativa, facilidad de mantenimiento
-                y continuidad en el suministro clínico.
-              </p>
-
-              <div class="product-cta">
-                <button class="btn btn-primary" type="button" data-add-quote="Panel PNL-1000">
-                  Agregar a lista de cotización
-                </button>
-                <a class="btn btn-ghost" href="#contacto">Solicitar información</a>
-              </div>
-            </div>
-
-            <aside class="pnl-side">
-              <figure class="framed">
-                <img src="resources/images/Panel%20PNL-1000%20Acompa%C3%B1ante%20texto%20principal.png" alt="Panel PNL-1000 REGAMSA, vista frontal del equipo" />
-                <figcaption>PNL-1000 · panel o pared hospitalaria</figcaption>
-              </figure>
-            </aside>
           </div>
         </div>
       </div>
@@ -457,6 +302,178 @@
 
   </main>
 
+  <!-- ===== VISTA APARTE: catalogo de seccion ===== -->
+  <main id="catalogViews" class="catalog-views" aria-live="polite" hidden>
+
+    <!-- Sección: Columnas Cielíticas -->
+    <section class="catalog-view" id="view-columnas-cieliticas" data-section="columnas-cieliticas" data-title="COLUMNAS CIELÍTICAS" aria-label="Catálogo: Columnas cielíticas">
+      <div class="view-band">
+        <div class="wrap">
+          <a class="view-back" href="#catalogo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Volver al catálogo
+          </a>
+          <div class="view-head">
+            <span class="view-index">02</span>
+            <span class="view-kicker">Línea de producto</span>
+            <h1 class="view-title">COLUMNAS CIELÍTICAS</h1>
+            <p class="view-desc">Sistemas suspendidos para quirófano que centralizan servicios médicos, eléctricos y gases medicinales en un solo punto de acceso.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap view-body">
+        <figure class="view-hero framed">
+          <img src="resources/images/Columna Cielitica Retráctil.png" alt="Columna cielítica retráctil REGAMSA en quirófano" />
+          <figcaption>Columna Cielítica Retráctil · presentación</figcaption>
+        </figure>
+
+        <div class="product-grid">
+          <div class="product-main">
+            <h3 class="product-h3">COLUMNA CIELÍTICA RETRÁCTIL</h3>
+            <p>
+              Un sistema suspendido para quirófano diseñado para centralizar servicios médicos,
+              eléctricos y gases medicinales en un solo punto de acceso, optimizando la
+              <strong>ergonomía y funcionalidad</strong> del entorno quirúrgico.
+            </p>
+            <p>
+              Incorpora un sistema de elevación electromecánico de accionamiento lineal,
+              desarrollado para sustituir los sistemas neumáticos convencionales, proporcionando
+              un <strong>movimiento de alta precisión</strong>, operación silenciosa y mayor
+              estabilidad durante su funcionamiento.
+            </p>
+            <p>
+              La Columna Cielítica Retráctil de Regamsa representa una solución avanzada para
+              hospitales y centros médicos que buscan combinar tecnología, eficiencia operativa
+              y diseño arquitectónico contemporáneo dentro de sus áreas críticas.
+            </p>
+
+            <aside class="app-box">
+              <p class="app-title">Entornos de aplicación:</p>
+              <ul>
+                <li>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
+                  Terapia Intensiva.
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
+                  Quirófanos.
+                </li>
+              </ul>
+            </aside>
+
+            <div class="product-cta">
+              <button class="btn btn-primary" type="button" data-add-quote="Columna Cielítica Retráctil">
+                Agregar a lista de cotización
+              </button>
+              <a class="btn btn-ghost" href="#contacto">Solicitar información</a>
+            </div>
+            <p class="red-note">¿Proyecto hospitalario en curso? <strong>Escríbenos</strong> — respondemos por contacto directo.</p>
+          </div>
+
+          <aside class="product-side">
+            <figure class="framed">
+              <img src="resources/images/Columna Cielitica Rectatil Acompañante texto principal.png" alt="Detalle de columna cielítica retráctil junto a texto descriptivo" />
+              <figcaption>Detalle · accionamiento lineal electromecánico</figcaption>
+            </figure>
+            <div class="spec-card">
+              <p class="spec-label">FICHA RESUMEN</p>
+              <ul>
+                <li><span>Tipo</span><strong>Columna suspendida retráctil</strong></li>
+                <li><span>Uso</span><strong>Quirófano / Terapia intensiva</strong></li>
+                <li><span>Servicios</span><strong>Gases, electricidad, datos</strong></li>
+                <li><span>Elevación</span><strong>Electromecánica lineal</strong></li>
+                <li><span>Operación</span><strong>Silenciosa y estable</strong></li>
+              </ul>
+              <button class="btn btn-dark" type="button" data-add-quote="Columna Cielítica Retráctil">Añadir a cotización</button>
+              <small>Sin precios en línea · cotización por contacto directo.</small>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección: Paneles -->
+    <section class="catalog-view" id="view-paneles" data-section="paneles" data-title="PANELES" aria-label="Catálogo: Paneles">
+      <div class="view-band">
+        <div class="wrap">
+          <a class="view-back" href="#catalogo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Volver al catálogo
+          </a>
+          <div class="view-head">
+            <span class="view-index">03</span>
+            <span class="view-kicker">Línea de producto</span>
+            <h1 class="view-title">PANELES</h1>
+            <p class="view-desc">Paneles hospitalarios modulares que integran servicios clínicos, gases medicinales y electricidad.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap view-body">
+        <figure class="view-hero framed">
+          <img src="resources/images/Panel PNL-1000.png" alt="Panel hospitalario PNL-1000 instalado en habitación de hospital" />
+          <figcaption>PNL-1000 · panel o pared hospitalaria</figcaption>
+        </figure>
+
+        <div class="product-grid">
+          <div class="product-main">
+            <h3 class="product-h3">PANEL PNL-1000</h3>
+            <p>
+              Panel o pared hospitalaria que integra servicios clínicos, gases medicinales y
+              electricidad en un solo punto de acceso, optimizando la funcionalidad y seguridad
+              del entorno de atención médica.
+            </p>
+            <p>
+              <strong>En cumplimiento con</strong> los criterios de ingeniería hospitalaria
+              establecidos en las <strong>Normas IMSS de Instalaciones Hidrosanitarias y
+              Especiales</strong>, así como los lineamientos de la <strong>NOM-025-SSA3-2013</strong>
+              para Unidades de Cuidados Intensivos.
+            </p>
+            <p>
+              Los paneles integran válvulas independientes de seccionamiento para cada salida de
+              gas medicinal, proporcionando mayor seguridad operativa, facilidad de mantenimiento
+              y continuidad en el suministro clínico.
+            </p>
+
+            <aside class="app-box app-box-light">
+              <p class="app-title">Entornos de aplicación:</p>
+              <ul class="app-inline">
+                <li>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
+                  Terapia Intensiva
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
+                  Terapia Intermedia
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>
+                  Urgencias
+                </li>
+              </ul>
+            </aside>
+
+            <div class="product-cta">
+              <button class="btn btn-primary" type="button" data-add-quote="Panel PNL-1000">
+                Agregar a lista de cotización
+              </button>
+              <a class="btn btn-ghost" href="#contacto">Solicitar información</a>
+            </div>
+          </div>
+
+          <aside class="product-side">
+            <figure class="framed">
+              <img src="resources/images/Panel PNL-1000 Acompañante texto principal.png" alt="Panel PNL-1000 REGAMSA, vista frontal del equipo" />
+              <figcaption>PNL-1000 · panel o pared hospitalaria</figcaption>
+            </figure>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <footer class="footer">
     <div class="wrap footer-grid">
       <div>
@@ -466,8 +483,9 @@
       <div>
         <p class="footer-h">SECCIONES</p>
         <a href="#quienes-somos">Quiénes somos</a>
-        <a href="#producto">Productos</a>
-        <a href="#paneles">Paneles</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#catalogo/columnas-cieliticas">Columnas cielíticas</a>
+        <a href="#catalogo/paneles">Paneles</a>
         <a href="#experiencia">Experiencia</a>
         <a href="#contacto">Contacto</a>
       </div>
@@ -499,6 +517,7 @@
 
   <div class="toast" id="toast" role="status" hidden></div>
 
-  <script src="app.js?v=nav-ink-1"></script>
+  <script src="app.js?v=3d-catalog-1"></script>
+
 </body>
 </html>

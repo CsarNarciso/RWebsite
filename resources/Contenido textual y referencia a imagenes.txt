@@ -58,3 +58,21 @@ Capacidad de monitorización 1 - 5 gases tiempo real
 Visualización Display de 7 segmentos
 
 Imagenes disponibles: "Alarma Digit Pro"
+
+
+ELECTROMECÁNICA (ANÁLOGA)
+
+La Alarma Electromecánica está diseñada para la supervisión local. Su arquitectura basada en componentes electromecánicos proporciona una operación robusta y de alta confiabilidad, incorporando switch de presión para líneas de presión positiva y también para aplicaciones de presión negativa, como vacío médico y WAGD. 
+El sistema integra indicadores visuales, alarma sonora y función de silenciado, y está fabricado bajo criterios aplicables de la norma NFPA 99 para sistemas de gases medicinales.
+
+Características
+
+Voltaje 90 - 110 V AC 60 Hz
+Corriente de entrada 2 A
+Temperatura de Operación 5 °C - 85° C
+Alerta sonora 95 dB
+Unidad de Medida PSI
+Capacidad de monitorización 1 - 5 gases tiempo real
+Visualización Display LCD
+
+Imagenes disponibles: "Alarma Electromecanica Analoga"

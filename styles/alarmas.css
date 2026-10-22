@@ -439,10 +439,19 @@
     transition: background .25s ease, box-shadow .25s ease;
 }
 
+#view-alarmas .al-board li:nth-child(1) { --al-gc: #43d97f; }
+#view-alarmas .al-board li:nth-child(2) { --al-gc: #ffd44d; }
+#view-alarmas .al-board li:nth-child(3) { --al-gc: #eef4f6; }
+#view-alarmas .al-board li:nth-child(4) { --al-gc: #6fb1ff; }
+#view-alarmas .al-board li:nth-child(6) { --al-gc: #aab3ba; }
+#view-alarmas .al-board li:nth-child(7) { --al-gc: #eef4f6; }
+#view-alarmas .al-board li:nth-child(8) { --al-gc: #eef4f6; }
+
 #view-alarmas .al-gas {
-    color: #9db2bc;
+    color: var(--al-gc, #9db2bc);
     text-transform: uppercase;
     letter-spacing: .09em;
+    transition: color .25s ease;
 }
 
 #view-alarmas .al-ps {

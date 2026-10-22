@@ -232,7 +232,7 @@
   // =========================================================
   // CATALOG — section data
   // =========================================================
-  var SECTION_IDS = ["columnas-cieliticas", "paneles"];
+  var SECTION_IDS = ["columnas-cieliticas", "paneles", "alarmas"];
 
   // =========================================================
   // VIEW ROUTER (separate catalog views via hash)
@@ -450,6 +450,86 @@
 
     setRotatorActive(0);
     startRotator();
+  }
+
+  // =========================================================
+  // ALARMAS — model switcher + sim board + internal scroll
+  // =========================================================
+  var alView = document.getElementById("view-alarmas");
+  if (alView) {
+    var alTabs = Array.prototype.slice.call(alView.querySelectorAll(".al-tab"));
+    var alPanels = Array.prototype.slice.call(alView.querySelectorAll(".al-panel"));
+    var alThemeBtn = alView.querySelector(".al-theme");
+
+    try { if (localStorage.getItem("regamsa_al_light") === "1") alView.classList.add("al-light"); } catch (e) {}
+
+    function syncAlTheme() {
+      if (!alThemeBtn) return;
+      var light = alView.classList.contains("al-light");
+      alThemeBtn.setAttribute("aria-pressed", light ? "true" : "false");
+      var txt = alThemeBtn.querySelector(".al-theme-txt");
+      if (txt) txt.textContent = light ? "Modo oscuro" : "Modo claro";
+    }
+
+    if (alThemeBtn) {
+      syncAlTheme();
+      alThemeBtn.addEventListener("click", function () {
+        var light = alView.classList.toggle("al-light");
+        try { localStorage.setItem("regamsa_al_light", light ? "1" : "0"); } catch (e) {}
+        syncAlTheme();
+      });
+    }
+
+    function selectAlarmTab(tab) {
+      alTabs.forEach(function (other) {
+        var on = other === tab;
+        other.setAttribute("aria-selected", on ? "true" : "false");
+        other.tabIndex = on ? 0 : -1;
+      });
+      alPanels.forEach(function (panel) {
+        panel.classList.toggle("is-open", panel.id === tab.getAttribute("aria-controls"));
+      });
+    }
+
+    alTabs.forEach(function (tab, index) {
+      tab.addEventListener("click", function () { selectAlarmTab(tab); });
+      tab.addEventListener("keydown", function (event) {
+        var next = null;
+        if (event.key === "ArrowDown" || event.key === "ArrowRight") next = alTabs[(index + 1) % alTabs.length];
+        else if (event.key === "ArrowUp" || event.key === "ArrowLeft") next = alTabs[(index - 1 + alTabs.length) % alTabs.length];
+        else if (event.key === "Home") next = alTabs[0];
+        else if (event.key === "End") next = alTabs[alTabs.length - 1];
+        if (next) {
+          event.preventDefault();
+          next.focus();
+          selectAlarmTab(next);
+        }
+      });
+    });
+
+    alView.querySelectorAll("[data-al-scroll]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var target = document.getElementById(btn.getAttribute("data-al-scroll"));
+        if (target) target.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "start" });
+      });
+    });
+
+    var alRows = Array.prototype.slice.call(alView.querySelectorAll(".al-board li"));
+    if (alRows.length && !reducedMotion.matches) {
+      setInterval(function () {
+        if (document.hidden || alView.offsetParent === null) return;
+        var row = alRows[Math.floor(Math.random() * alRows.length)];
+        if (!row) return;
+        var stateEl = row.querySelector(".al-state");
+        var prev = stateEl ? stateEl.textContent : "";
+        row.classList.add("is-alert");
+        if (stateEl) stateEl.textContent = "REVISAR";
+        setTimeout(function () {
+          row.classList.remove("is-alert");
+          if (stateEl) stateEl.textContent = prev;
+        }, 1600);
+      }, 3400);
+    }
   }
 
   // =========================================================

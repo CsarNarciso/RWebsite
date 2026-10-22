@@ -493,6 +493,16 @@ strong {
     }
 }
 
+@media (max-width:560px) {
+    .brand img {
+        height:48px;
+        margin-block:6px
+    }
+    .nav-inner {
+        min-height:58px
+    }
+}
+
 @media(prefers-reduced-motion:reduce) {
     .nav-ink {
         display:none;

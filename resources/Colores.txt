@@ -1,0 +1,3 @@
+--reg-claro:#65dac7;
+--reg-oscuro:#0a808a;
+--reg-azul:#0744af;

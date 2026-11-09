@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Regamsa Medical — Detalle de producto</title><link rel="stylesheet" href="styles.css"><script src="productos.js"></script><script src="app.js" defer></script></head>
+<body><div class="topline"><span>INGENIERÍA PARA EL ENTORNO HOSPITALARIO</span><span>Catálogo arquitectónico →</span></div>
+<header><a href="index.html#inicio" aria-label="Regamsa Medical, inicio"><img class="logo" src="assets/Logo%20Empresa.png" alt="Regamsa Medical"></a><button class="menu" aria-expanded="false" aria-controls="nav">Menú <span>☰</span></button><nav id="nav"><a href="index.html#soluciones">Soluciones</a><a href="index.html#alarmas">Alarmas de presión</a><a href="index.html#nosotros">Nosotros</a><a class="nav-cta" href="index.html#catalogo">Explorar catálogo <span>→</span></a></nav></header>
+<main id="product-detail">
+  <div class="pd-page">
+    <div class="pd-page-bg"><img id="pd-hero-bg" src="" alt=""></div>
+    <div class="pd-page-overlay"></div>
+    <section class="pd-hero">
+      <div class="wrap pd-hero-content">
+      <div class="pd-hero-text">
+        <span class="pd-tag" id="pd-tag"></span>
+        <p class="pd-section" id="pd-section"></p>
+        <h1 class="pd-title" id="pd-title"></h1>
+        <p class="pd-lead" id="pd-lead"></p>
+        <p class="pd-desc" id="pd-desc"></p>
+        <div class="pd-chips" id="pd-chips"></div>
+        <div class="pd-cta">
+          <a class="button" href="index.html#nosotros">Solicitar información →</a>
+          <a class="btn-link pd-back-link" id="pd-back" href="#">← Volver a la línea</a>
+        </div>
+      </div>
+      <div class="pd-hero-media">
+        <div class="pd-main-img"><img id="pd-main" src="" alt=""></div>
+        <div class="pd-thumbs" id="pd-thumbs"></div>
+      </div>
+    </div>
+  </section>
+  <section class="pd-specs-section">
+    <div class="wrap">
+      <div class="pd-card">
+      <div class="pd-specs-grid">
+        <div class="pd-specs">
+          <p class="section-eyebrow">Especificaciones técnicas</p>
+          <h2 class="pd-specs-title">Ficha técnica</h2>
+          <div class="pd-spec-table" id="pd-specs"></div>
+        </div>
+        <div class="pd-features">
+          <p class="section-eyebrow">Características</p>
+          <h2 class="pd-specs-title">Lo que incluye</h2>
+          <ul class="pd-feature-list" id="pd-features"></ul>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  </div>
+</main>
+<footer><img class="logo" src="assets/Logo%20Empresa.png" alt="Regamsa Medical"><p>Equipamiento e infraestructura hospitalaria.</p><a href="index.html#inicio">Volver al inicio ↑</a></footer>
+<script>
+(function(){
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id');
+  const p = (window.PRODUCTS||{})[id];
+  if(!p){ document.getElementById('product-detail').innerHTML = '<div class="wrap"><p style="padding:60px 0">Producto no encontrado.</p><a class="btn-link" href="index.html">← Volver</a></div>'; return; }
+  document.title = 'Regamsa Medical — ' + p.name;
+  document.getElementById('pd-tag').textContent = p.tag;
+  document.getElementById('pd-section').textContent = p.section;
+  document.getElementById('pd-title').textContent = p.name;
+  document.getElementById('pd-lead').textContent = p.lead;
+  document.getElementById('pd-desc').textContent = p.description;
+  const main = document.getElementById('pd-main');
+  main.src = p.images[0];
+  main.alt = p.name;
+  const heroBg = document.getElementById('pd-hero-bg');
+  if(heroBg){ heroBg.src = p.images[0]; heroBg.alt = p.name; }
+  const thumbs = document.getElementById('pd-thumbs');
+  p.images.forEach((src,i)=>{
+    const b = document.createElement('button');
+    b.type='button';
+    b.className = 'pd-thumb' + (i===0?' is-active':'');
+    b.innerHTML = '<img src="'+src+'" alt="">';
+    b.addEventListener('click', ()=>{ main.src = src; thumbs.querySelectorAll('.pd-thumb').forEach(t=>t.classList.remove('is-active')); b.classList.add('is-active'); });
+    thumbs.appendChild(b);
+  });
+  const chips = document.getElementById('pd-chips');
+  p.specs.slice(0,3).forEach(s=>{ const c=document.createElement('span'); c.className='pd-chip'; c.textContent = s.label+': '+s.value; chips.appendChild(c); });
+  const specs = document.getElementById('pd-specs');
+  p.specs.forEach(s=>{ const row=document.createElement('div'); row.className='pd-spec-row'; row.innerHTML = '<span class="pd-spec-label">'+s.label+'</span><span class="pd-spec-value">'+s.value+'</span>'; specs.appendChild(row); });
+  const feats = document.getElementById('pd-features');
+  p.features.forEach(f=>{ const li=document.createElement('li'); li.innerHTML = '<span class="pd-check">✓</span>'+f; feats.appendChild(li); });
+  const back = document.getElementById('pd-back');
+  back.href = p.sectionUrl;
+})();
+</script>
+</body></html>

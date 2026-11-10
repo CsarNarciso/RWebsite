@@ -3,32 +3,52 @@
 <body><div class="topline"><span>INGENIERÍA PARA EL ENTORNO HOSPITALARIO</span><span>Catálogo arquitectónico →</span></div>
 <header><a href="index.html#inicio" aria-label="Regamsa Medical, inicio"><img class="logo" src="assets/Logo%20Empresa.png" alt="Regamsa Medical"></a><button class="menu" aria-expanded="false" aria-controls="nav">Menú <span>☰</span></button><nav id="nav"><a href="index.html#soluciones">Soluciones</a><a href="index.html#alarmas">Alarmas de presión</a><a href="index.html#nosotros">Nosotros</a><a class="nav-cta" href="index.html#catalogo">Explorar catálogo <span>→</span></a></nav></header>
 <main id="product-detail">
-  <div class="pd-page">
-    <div class="pd-page-bg"><img id="pd-hero-bg" src="" alt=""></div>
-    <div class="pd-page-overlay"></div>
-    <section class="pd-hero">
-      <div class="wrap pd-hero-content">
-      <div class="pd-hero-text">
-        <span class="pd-tag" id="pd-tag"></span>
-        <p class="pd-section" id="pd-section"></p>
-        <h1 class="pd-title" id="pd-title"></h1>
-        <p class="pd-lead" id="pd-lead"></p>
-        <p class="pd-desc" id="pd-desc"></p>
-        <div class="pd-chips" id="pd-chips"></div>
-        <div class="pd-cta">
-          <a class="button" href="index.html#nosotros">Solicitar información →</a>
-          <a class="btn-link pd-back-link" id="pd-back" href="#">← Volver a la línea</a>
-        </div>
+  <section class="pd-hero">
+    <div class="pd-hero-photo"><img id="pd-hero-photo" src="" alt=""></div>
+    <div class="pd-hero-overlay"></div>
+    <div class="wrap pd-hero-copy">
+      <span class="pd-tag" id="pd-tag"></span>
+      <p class="pd-section" id="pd-section"></p>
+      <h1 class="pd-title" id="pd-title"></h1>
+      <p class="pd-lead" id="pd-lead"></p>
+      <p class="pd-desc" id="pd-desc"></p>
+      <div class="pd-chips" id="pd-chips"></div>
+      <div class="pd-cta">
+        <a class="button" href="index.html#nosotros">Solicitar información →</a>
+        <a class="btn-link pd-back-link" id="pd-back" href="#">← Volver a la línea</a>
       </div>
-      <div class="pd-hero-media">
+    </div>
+  </section>
+  <section class="pd-gallery">
+    <div class="wrap">
+      <div class="pd-media">
         <div class="pd-main-img"><img id="pd-main" src="" alt=""></div>
         <div class="pd-thumbs" id="pd-thumbs"></div>
       </div>
     </div>
   </section>
+  <section class="pd-band">
+    <div class="wrap pd-band-grid">
+      <div class="pd-band-media"><img id="pd-band-img1" src="" alt=""></div>
+      <div class="pd-band-copy">
+        <p class="pd-band-eyebrow">Ingeniería hospitalaria</p>
+        <h2 class="pd-band-title">Diseñado para el entorno clínico.</h2>
+        <p class="pd-band-text">Equipamiento que integra ingeniería y cuidado, con acabados y componentes pensados para las exigencias del ambiente hospitalario.</p>
+      </div>
+    </div>
+  </section>
+  <section class="pd-band pd-band-reverse">
+    <div class="wrap pd-band-grid">
+      <div class="pd-band-media"><img id="pd-band-img2" src="" alt=""></div>
+      <div class="pd-band-copy">
+        <p class="pd-band-eyebrow">Monitoreo continuo</p>
+        <h2 class="pd-band-title">Cada conexión. Una vida.</h2>
+        <p class="pd-band-text">Supervisión en tiempo real, señalización audiovisual inmediata y salidas de integración para sistemas externos de supervisión.</p>
+      </div>
+    </div>
+  </section>
   <section class="pd-specs-section">
     <div class="wrap">
-      <div class="pd-card">
       <div class="pd-specs-grid">
         <div class="pd-specs">
           <p class="section-eyebrow">Especificaciones técnicas</p>
@@ -41,10 +61,8 @@
           <ul class="pd-feature-list" id="pd-features"></ul>
         </div>
       </div>
-      </div>
     </div>
   </section>
-  </div>
 </main>
 <footer><img class="logo" src="assets/Logo%20Empresa.png" alt="Regamsa Medical"><p>Equipamiento e infraestructura hospitalaria.</p><a href="index.html#inicio">Volver al inicio ↑</a></footer>
 <script>
@@ -62,8 +80,10 @@
   const main = document.getElementById('pd-main');
   main.src = p.images[0];
   main.alt = p.name;
-  const heroBg = document.getElementById('pd-hero-bg');
-  if(heroBg){ heroBg.src = p.images[0]; heroBg.alt = p.name; }
+  const heroPhoto = document.getElementById('pd-hero-photo');
+  if(heroPhoto){ heroPhoto.src = p.images[0]; heroPhoto.alt = p.name; }
+  const b1 = document.getElementById('pd-band-img1'); if(b1 && p.images[0]){ b1.src = p.images[0]; b1.alt = p.name; }
+  const b2 = document.getElementById('pd-band-img2'); if(b2 && p.images[1]){ b2.src = p.images[1]; b2.alt = p.name; } else if(b2 && p.images[0]){ b2.src = p.images[0]; b2.alt = p.name; }
   const thumbs = document.getElementById('pd-thumbs');
   p.images.forEach((src,i)=>{
     const b = document.createElement('button');

@@ -1565,6 +1565,10 @@ summary {
     scroll-margin-top: 96px
 }
 
+.device-section + .device-section {
+    border-top: 30px solid rgba(255, 255, 255, 0.25)
+}
+
 .device-art {
     background: var(--teal);
     position: relative;

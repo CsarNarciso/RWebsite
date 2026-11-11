@@ -1585,6 +1585,30 @@ summary {
     mix-blend-mode: multiply
 }
 
+/* Solo la imagen es un enlace al detalle del producto. */
+.device-media-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 660px;
+    cursor: pointer
+}
+
+.device-media-link img {
+    transition: transform var(--transicion)
+}
+
+.device-media-link:hover img {
+    transform: scale(1.03)
+}
+
+.device-media-link:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 8px;
+    border-radius: 12px
+}
+
 .device-copy {
     display: flex;
     flex-direction: column;
@@ -1838,7 +1862,33 @@ summary {
     display: flex;
     flex-direction: column;
     min-height: 480px;
+    position: relative;
+    cursor: pointer
 }
+
+/* El enlace del título se estira sobre toda la tarjeta: un solo enlace
+   accesible por producto, clic o tab en cualquier punto de la tarjeta. */
+.product-link {
+    color: inherit;
+    text-decoration: none
+}
+
+.product-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit
+}
+
+.product-link:focus-visible {
+    outline: none
+}
+
+.product-card:focus-within {
+    outline: 3px solid var(--blue);
+    outline-offset: 4px
+}
+
 .product-body .btn-link {
     margin-top: auto;
 }
@@ -2012,7 +2062,7 @@ summary {
 }
 
 /* =========================================================
-   CATALOG INDEX Ã¢â‚¬â€ 3D SECTION CAROUSEL + SEPARATE SECTION VIEW
+   CATALOG INDEX - 3D SECTION CAROUSEL + SEPARATE SECTION VIEW
    ========================================================= */
 
 .is-hidden {
@@ -2050,24 +2100,26 @@ summary {
 .rotator-track {
     position: relative;
     display: grid;
-    min-height: 352px;
+    min-height: 400px;
+    justify-items: center
 }
 
 .rotator-card {
     grid-area: 1 / 1;
-    width: 100%;
+    width: 400px;
+    max-width: 92%;
     display: grid;
-    grid-template-columns: 1.02fr .98fr;
-    min-height: 342px;
+    grid-template-columns: 1fr;
+    min-height: 0;
     background: #fff;
     border: 1px solid var(--linea);
-    border-radius: 20px;
+    border-radius: 18px;
     overflow: hidden;
     text-decoration: none;
     box-shadow: var(--sombra);
     backface-visibility: hidden;
-    transform: perspective(1500px) translateX(calc(var(--rot-offset, 0) * 58%)) translateZ(calc(var(--rot-offset, 0) * -190px)) rotateY(calc(var(--rot-offset, 0) * -46deg)) scale(calc(1 - var(--rot-abs, 0) * .16));
-    opacity: max(0, calc(1 - var(--rot-abs, 0) * .38));
+    transform: perspective(1500px) translateX(calc(var(--rot-offset, 0) * 96%)) translateZ(calc(var(--rot-offset, 0) * -150px)) rotateY(calc(var(--rot-offset, 0) * -42deg)) scale(calc(1 - var(--rot-abs, 0) * .12));
+    opacity: max(0, calc(1 - var(--rot-abs, 0) * .34));
     transition: transform .68s cubic-bezier(.2, .85, .25, 1), opacity .5s ease, border-color .2s ease, box-shadow .2s ease;
     will-change: transform, opacity;
     cursor: pointer;
@@ -2092,10 +2144,12 @@ summary {
 .rotator-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: 9px;
-    padding: 38px 36px;
+    gap: 8px;
+    height: 152px;
+    padding: 20px 22px 22px;
+    overflow: hidden;
 }
 
 .rotator-index {
@@ -2122,18 +2176,22 @@ summary {
 }
 
 .rotator-title {
-    font-size: clamp(24px, 2.9vw, 34px);
-    line-height: 1.1;
+    font-size: clamp(20px, 1.7vw, 24px);
+    line-height: 1.15;
     letter-spacing: .04em;
     font-weight: 800;
     color: var(--gris-titulo);
 }
 
 .rotator-desc {
-    max-width: 42ch;
-    font-size: 14.5px;
-    line-height: 1.6;
+    max-width: none;
+    font-size: 13.5px;
+    line-height: 1.55;
     color: var(--gris-texto);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .rotator-count {
@@ -2172,6 +2230,7 @@ summary {
     display: block;
     overflow: hidden;
     background: #eef4f4;
+    height: 245px;
 }
 
 .rotator-media img {
@@ -2295,7 +2354,7 @@ summary {
 }
 
 /* =========================================================
-   VISTA APARTE Ã¢â‚¬â€ CATALOGO DE SECCION
+   VISTA APARTE - CATALOGO DE SECCION
    ========================================================= */
 .catalog-views {
     display: none;
@@ -2437,20 +2496,20 @@ summary {
     .rotator-card {
         grid-template-columns: 1fr;
         min-height: 0;
-        transform: perspective(1500px) translateX(calc(var(--rot-offset, 0) * 34%)) translateZ(calc(var(--rot-offset, 0) * -130px)) rotateY(calc(var(--rot-offset, 0) * -36deg)) scale(calc(1 - var(--rot-abs, 0) * .14));
+        transform: perspective(1500px) translateX(calc(var(--rot-offset, 0) * 42%)) translateZ(calc(var(--rot-offset, 0) * -120px)) rotateY(calc(var(--rot-offset, 0) * -34deg)) scale(calc(1 - var(--rot-abs, 0) * .12));
     }
 
     .rotator-media {
-        min-height: 220px;
-        max-height: 250px;
+        height: 225px;
     }
 
     .rotator-info {
-        padding: 24px 22px 28px;
+        height: 138px;
+        padding: 18px 18px 20px;
     }
 
     .rotator-desc {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .view-hero img {

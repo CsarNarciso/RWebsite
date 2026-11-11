@@ -107,6 +107,8 @@ window.PRODUCTS = {
       "assets/Secciones de Productos/Columnas cieliticas/Columna Cielitica Rectatil 1.webp",
       "assets/Secciones de Productos/Columnas cieliticas/Columna Cielitica Rectatil 2.webp"
     ],
+    // if config is true then return same
+    // type of configuration.
     specs: [
       { label: "Tipo", value: "Retráctil" },
       { label: "Uso", value: "Quirófano" },

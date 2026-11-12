@@ -9,13 +9,89 @@ document.querySelectorAll('[data-gallery]').forEach(b => b.addEventListener('cli
 const rotatorTrack = document.getElementById('rotatorTrack');
 const rotatorCards = rotatorTrack ? Array.from(rotatorTrack.querySelectorAll('.rotator-card')) : [];
 const rotatorDots = document.getElementById('rotatorDots');
-const rotatorPrev = document.getElementById('rotatorPrev');
-const rotatorNext = document.getElementById('rotatorNext');
-const rotatorPause = document.getElementById('rotatorPause');
-let rotIndex = 0, rotTimer = null; const ROT_DELAY = 4500;
+let rotIndex = 0, rotTimer = null, rotOver = false; const ROT_DELAY = 4500;
+const rotReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function rotUpdate() { const n = rotatorCards.length; rotatorCards.forEach((c, i) => { let off = i - rotIndex; if (off > n / 2) off -= n; if (off < -n / 2) off += n; const abs = Math.abs(off); c.style.setProperty('--rot-offset', off); c.style.setProperty('--rot-abs', abs); c.classList.toggle('is-active', off === 0); c.setAttribute('aria-hidden', off === 0 ? 'false' : 'true'); c.style.zIndex = String(10 - abs); }); if (rotatorDots) rotatorDots.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-current', i === rotIndex ? 'true' : 'false')); }
 function rotGo(i) { const n = rotatorCards.length; rotIndex = (i + n) % n; rotUpdate(); }
 function rotNext() { rotGo(rotIndex + 1); } function rotPrev() { rotGo(rotIndex - 1); }
-function rotStart() { rotStop(); rotTimer = setInterval(rotNext, ROT_DELAY); }
+function rotStart() { rotStop(); if (!rotReduce) rotTimer = setInterval(rotNext, ROT_DELAY); }
 function rotStop() { if (rotTimer) { clearInterval(rotTimer); rotTimer = null; } }
-if (rotatorCards.length) { if (rotatorDots) { rotatorCards.forEach((_, i) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Seccion ' + (i + 1)); b.addEventListener('click', () => { rotGo(i); rotStart(); }); rotatorDots.appendChild(b); }); } rotUpdate(); rotStart(); rotatorNext && rotatorNext.addEventListener('click', () => { rotNext(); rotStart(); }); rotatorPrev && rotatorPrev.addEventListener('click', () => { rotPrev(); rotStart(); }); rotatorPause && rotatorPause.addEventListener('click', () => { const paused = rotatorPause.getAttribute('aria-pressed') === 'true'; rotatorPause.setAttribute('aria-pressed', String(!paused)); if (paused) rotStart(); else rotStop(); }); const vp = document.getElementById('rotatorViewport'); if (vp) { vp.addEventListener('mouseenter', rotStop); vp.addEventListener('mouseleave', () => { if (rotatorPause.getAttribute('aria-pressed') !== 'true') rotStart(); }); } }
+
+/* Arrastre horizontal (ratón y táctil): el carrusel GIRA sobre su eje,
+   sin desplazarse de su lugar. Las tarjetas se mueven por el arco del
+   coverflow según la fracción de tarjeta arrastrada. */
+const ROT_DRAG_SPAN = 400;   /* px que equivalen a una tarjeta */
+const ROT_DRAG_MIN = .3;     /* fracción de tarjeta para cambiar */
+function rotBindDrag(vp) {
+  let dragging = false, startX = 0, startY = 0, dx = 0, axis = null, pid = null;
+  let moved = false;
+
+  const paint = t => {
+    const n = rotatorCards.length;
+    rotatorCards.forEach((c, i) => {
+      let off = i - rotIndex + t;
+      if (off > n / 2) off -= n;
+      if (off < -n / 2) off += n;
+      c.style.setProperty('--rot-offset', off.toFixed(3));
+      c.style.setProperty('--rot-abs', Math.abs(off).toFixed(3));
+      c.style.zIndex = String(10 - Math.round(Math.abs(off)));
+      c.setAttribute('aria-hidden', Math.abs(off) < .5 ? 'false' : 'true');
+    });
+  };
+
+  /* Cancela el arrastre nativo de la imagen/enlace: si no, el navegador
+     "roba" el gesto (fantasma con la ruta) y el carrusel no se mueve. */
+  vp.addEventListener('dragstart', e => e.preventDefault());
+
+  vp.addEventListener('pointerdown', e => {
+    if (e.button > 0) return;
+    dragging = true; axis = null; dx = 0; pid = e.pointerId;
+    startX = e.clientX; startY = e.clientY;
+    rotStop();
+  });
+
+  vp.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const mx = e.clientX - startX, my = e.clientY - startY;
+    if (!axis) {
+      if (Math.abs(mx) < 6 && Math.abs(my) < 6) return;
+      axis = Math.abs(mx) > Math.abs(my) ? 'x' : 'y';
+      if (axis === 'x') {
+        vp.classList.add('is-dragging');
+        rotatorCards.forEach(c => c.classList.remove('is-active'));
+        /* La captura solo cuando ya es un arrastre horizontal: si se captura
+           en pointerdown, el click se despacha al viewport y la tarjeta
+           deja de navegar. */
+        try { vp.setPointerCapture(pid); } catch (err) {}
+      }
+    }
+    if (axis !== 'x') return;
+    e.preventDefault();
+    dx = mx;
+    if (Math.abs(dx) > 8) moved = true;
+    paint(Math.max(-1, Math.min(1, dx / ROT_DRAG_SPAN)));
+  });
+
+  const end = () => {
+    if (!dragging) return;
+    dragging = false;
+    if (axis === 'x') {
+      const t = Math.max(-1, Math.min(1, dx / ROT_DRAG_SPAN));
+      if (Math.abs(t) > ROT_DRAG_MIN) { if (t < 0) rotNext(); else rotPrev(); }
+      else rotUpdate();
+    }
+    vp.classList.remove('is-dragging');
+    try { if (pid !== null) vp.releasePointerCapture(pid); } catch (err) {}
+    axis = null; dx = 0; pid = null;
+    /* La bandera vive un instante: justo lo que tarda en llegar el click
+       de este mismo gesto. Si no hay click, se limpia sola. */
+    setTimeout(() => { moved = false; }, 0);
+    if (!rotOver) rotStart();
+  };
+  vp.addEventListener('pointerup', end);
+  vp.addEventListener('pointercancel', end);
+  vp.addEventListener('lostpointercapture', end);
+  /* Un arrastre no debe activar el enlace de la tarjeta. */
+  vp.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+}
+if (rotatorCards.length) { if (rotatorDots) { rotatorCards.forEach((_, i) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Seccion ' + (i + 1)); b.addEventListener('click', () => { rotGo(i); rotStart(); }); rotatorDots.appendChild(b); }); } rotUpdate(); rotStart(); const vp = document.getElementById('rotatorViewport'); if (vp) { vp.addEventListener('mouseenter', () => { rotOver = true; rotStop(); }); vp.addEventListener('mouseleave', () => { rotOver = false; rotStart(); }); rotBindDrag(vp); } }

@@ -2089,6 +2089,16 @@ summary {
     padding: 12px 0 8px;
     outline: none;
     -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
+    cursor: grab
+}
+
+.rotator-viewport.is-dragging {
+    cursor: grabbing
+}
+
+.rotator-viewport.is-dragging .rotator-card {
+    transition: none
 }
 
 .rotator-viewport:focus-visible {
@@ -2242,6 +2252,8 @@ summary {
     object-fit: cover;
     display: block;
     transition: transform .5s ease;
+    -webkit-user-drag: none;
+    user-select: none
 }
 
 .rotator-card:hover .rotator-media img {
@@ -2292,66 +2304,36 @@ summary {
     background: linear-gradient(90deg, var(--reg-claro), var(--reg-oscuro));
 }
 
-.rotator-dots button:focus-visible,
-.rotator-arrow:focus-visible,
-.rotator-pause:focus-visible {
+.rotator-dots button:focus-visible {
     outline: 2px solid var(--reg-oscuro);
     outline-offset: 3px;
 }
 
-.rotator-actions {
+.rotator-hint {
     display: flex;
     align-items: center;
     gap: 8px;
-}
-
-.rotator-arrow {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--linea);
-    background: #fff;
-    color: var(--gris-fuerte);
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    transition: border-color .18s ease, color .18s ease, transform .18s ease;
-}
-
-.rotator-arrow:hover {
-    border-color: var(--reg-oscuro);
-    color: var(--reg-oscuro);
-    transform: translateY(-1px);
-}
-
-.rotator-arrow svg {
-    width: 17px;
-    height: 17px;
-}
-
-.rotator-pause {
-    height: 36px;
-    padding: 0 14px;
-    border: 1px solid var(--linea);
-    border-radius: 999px;
-    background: #fff;
-    color: var(--gris-texto);
-    font-family: inherit;
-    font-size: 12px;
+    margin: 0;
+    font-size: 11.5px;
     font-weight: 700;
-    letter-spacing: .04em;
-    cursor: pointer;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gris-texto);
+    cursor: grab;
+    -webkit-user-select: none;
+    user-select: none
 }
 
-.rotator-pause:hover {
-    border-color: var(--reg-oscuro);
-    color: var(--reg-oscuro);
+.rotator-hint span {
+    font-size: 14px;
+    line-height: 1;
 }
 
-.rotator-pause[aria-pressed="true"] {
-    background: #eefaf8;
-    border-color: rgba(10, 128, 138, .32);
-    color: var(--reg-oscuro);
+@media (max-width: 860px) {
+    .rotator-hint {
+        font-size: 10px;
+        letter-spacing: .1em
+    }
 }
 
 /* =========================================================
@@ -2521,6 +2503,7 @@ summary {
 @media (max-width: 560px) {
     .rotator-controls {
         justify-content: center;
+        gap: 12px;
     }
 
     .rotator-dots {
@@ -2529,8 +2512,10 @@ summary {
         justify-content: center;
     }
 
-    .rotator-actions {
+    .rotator-hint {
         order: 1;
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -2541,8 +2526,7 @@ summary {
 
     .rotator-card,
     .rotator-media img,
-    .rotator-cta svg,
-    .rotator-arrow {
+    .rotator-cta svg {
         transition: none;
     }
 }

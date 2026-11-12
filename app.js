@@ -23,7 +23,7 @@ function rotStop() { if (rotTimer) { clearInterval(rotTimer); rotTimer = null; }
 const ROT_DRAG_SPAN = 400;   /* px que equivalen a una tarjeta */
 const ROT_DRAG_MIN = .3;     /* fracción de tarjeta para cambiar */
 function rotBindDrag(vp) {
-  let dragging = false, startX = 0, startY = 0, dx = 0, axis = null, pid = null;
+  let dragging = false, startX = 0, startY = 0, dx = 0, axis = null;
   let moved = false;
 
   const paint = t => {
@@ -45,7 +45,7 @@ function rotBindDrag(vp) {
 
   vp.addEventListener('pointerdown', e => {
     if (e.button > 0) return;
-    dragging = true; axis = null; dx = 0; pid = e.pointerId;
+    dragging = true; axis = null; dx = 0;
     startX = e.clientX; startY = e.clientY;
     rotStop();
   });
@@ -59,10 +59,6 @@ function rotBindDrag(vp) {
       if (axis === 'x') {
         vp.classList.add('is-dragging');
         rotatorCards.forEach(c => c.classList.remove('is-active'));
-        /* La captura solo cuando ya es un arrastre horizontal: si se captura
-           en pointerdown, el click se despacha al viewport y la tarjeta
-           deja de navegar. */
-        try { vp.setPointerCapture(pid); } catch (err) {}
       }
     }
     if (axis !== 'x') return;
@@ -81,8 +77,7 @@ function rotBindDrag(vp) {
       else rotUpdate();
     }
     vp.classList.remove('is-dragging');
-    try { if (pid !== null) vp.releasePointerCapture(pid); } catch (err) {}
-    axis = null; dx = 0; pid = null;
+    axis = null; dx = 0;
     /* La bandera vive un instante: justo lo que tarda en llegar el click
        de este mismo gesto. Si no hay click, se limpia sola. */
     setTimeout(() => { moved = false; }, 0);
@@ -90,7 +85,6 @@ function rotBindDrag(vp) {
   };
   vp.addEventListener('pointerup', end);
   vp.addEventListener('pointercancel', end);
-  vp.addEventListener('lostpointercapture', end);
   /* Un arrastre no debe activar el enlace de la tarjeta. */
   vp.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
 }

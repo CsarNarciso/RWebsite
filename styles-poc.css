@@ -294,14 +294,6 @@ nav a.nav-cta:hover {
     background: linear-gradient(90deg, rgba(255, 255, 255, .12), transparent 45%)
 }
 
-.rotator-dots button {
-    background: #dde6e5
-}
-
-.rotator-dots button[aria-current="true"] {
-    background: var(--pc-blue)
-}
-
 .rotator-arrow {
     border-color: var(--pc-line);
     color: var(--pc-ink)

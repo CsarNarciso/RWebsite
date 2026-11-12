@@ -2268,47 +2268,6 @@ summary {
     pointer-events: none;
 }
 
-/* ---------- CONTROLES ---------- */
-.rotator-controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-top: 18px;
-    flex-wrap: wrap;
-}
-
-.rotator-dots {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.rotator-dots button {
-    width: 26px;
-    height: 6px;
-    padding: 0;
-    border: 0;
-    border-radius: 99px;
-    background: #dbe6e6;
-    cursor: pointer;
-    transition: width .2s ease, background .2s ease;
-}
-
-.rotator-dots button:hover {
-    background: #bfd8d5;
-}
-
-.rotator-dots button[aria-current="true"] {
-    width: 46px;
-    background: linear-gradient(90deg, var(--reg-claro), var(--reg-oscuro));
-}
-
-.rotator-dots button:focus-visible {
-    outline: 2px solid var(--reg-oscuro);
-    outline-offset: 3px;
-}
-
 .rotator-hint {
     display: flex;
     align-items: center;
@@ -2501,16 +2460,6 @@ summary {
 }
 
 @media (max-width: 560px) {
-    .rotator-controls {
-        justify-content: center;
-        gap: 12px;
-    }
-
-    .rotator-dots {
-        order: 2;
-        width: 100%;
-        justify-content: center;
-    }
 
     .rotator-hint {
         order: 1;

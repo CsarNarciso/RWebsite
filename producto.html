@@ -44,22 +44,8 @@
         <p class="pd-band-eyebrow">Monitoreo continuo</p>
         <h2 class="pd-band-title">Cada conexión. Una vida.</h2>
         <p class="pd-band-text">Supervisión en tiempo real, señalización audiovisual inmediata y salidas de integración para sistemas externos de supervisión.</p>
-      </div>
-    </div>
-  </section>
-  <section class="pd-specs-section">
-    <div class="wrap">
-      <div class="pd-specs-grid">
-        <div class="pd-specs">
-          <p class="section-eyebrow">Especificaciones técnicas</p>
-          <h2 class="pd-specs-title">Ficha técnica</h2>
-          <div class="pd-spec-table" id="pd-specs"></div>
-        </div>
-        <div class="pd-features">
-          <p class="section-eyebrow">Características</p>
-          <h2 class="pd-specs-title">Lo que incluye</h2>
-          <ul class="pd-feature-list" id="pd-features"></ul>
-        </div>
+        <p class="pd-band-list-title">Lo que incluye</p>
+        <ul class="pd-band-list" id="pd-features"></ul>
       </div>
     </div>
   </section>
@@ -95,10 +81,8 @@
   });
   const chips = document.getElementById('pd-chips');
   p.specs.slice(0,3).forEach(s=>{ const c=document.createElement('span'); c.className='pd-chip'; c.textContent = s.label+': '+s.value; chips.appendChild(c); });
-  const specs = document.getElementById('pd-specs');
-  p.specs.forEach(s=>{ const row=document.createElement('div'); row.className='pd-spec-row'; row.innerHTML = '<span class="pd-spec-label">'+s.label+'</span><span class="pd-spec-value">'+s.value+'</span>'; specs.appendChild(row); });
   const feats = document.getElementById('pd-features');
-  p.features.forEach(f=>{ const li=document.createElement('li'); li.innerHTML = '<span class="pd-check">✓</span>'+f; feats.appendChild(li); });
+  p.features.forEach(f=>{ const li=document.createElement('li'); li.textContent = f; feats.appendChild(li); });
   const back = document.getElementById('pd-back');
   back.href = p.sectionUrl;
 })();

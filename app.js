@@ -11,7 +11,7 @@ const rotatorCards = rotatorTrack ? Array.from(rotatorTrack.querySelectorAll('.r
 const rotatorDots = document.getElementById('rotatorDots');
 let rotIndex = 0, rotTimer = null, rotOver = false; const ROT_DELAY = 4500;
 const rotReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function rotUpdate() { const n = rotatorCards.length; rotatorCards.forEach((c, i) => { let off = i - rotIndex; if (off > n / 2) off -= n; if (off < -n / 2) off += n; const abs = Math.abs(off); c.style.setProperty('--rot-offset', off); c.style.setProperty('--rot-abs', abs); c.classList.toggle('is-active', off === 0); c.setAttribute('aria-hidden', off === 0 ? 'false' : 'true'); c.style.zIndex = String(10 - abs); }); if (rotatorDots) rotatorDots.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-current', i === rotIndex ? 'true' : 'false')); }
+function rotUpdate() { const n = rotatorCards.length; rotatorCards.forEach((c, i) => { let off = i - rotIndex; if (off > n / 2) off -= n; if (off < -n / 2) off += n; const abs = Math.abs(off); c.style.setProperty('--rot-offset', off); c.style.setProperty('--rot-abs', abs); c.classList.toggle('is-active', off === 0); c.setAttribute('aria-current', off === 0 ? 'true' : 'false'); c.style.zIndex = String(10 - abs); }); if (rotatorDots) rotatorDots.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-current', i === rotIndex ? 'true' : 'false')); }
 function rotGo(i) { const n = rotatorCards.length; rotIndex = (i + n) % n; rotUpdate(); }
 function rotNext() { rotGo(rotIndex + 1); } function rotPrev() { rotGo(rotIndex - 1); }
 function rotStart() { rotStop(); if (!rotReduce) rotTimer = setInterval(rotNext, ROT_DELAY); }
@@ -35,7 +35,7 @@ function rotBindDrag(vp) {
       c.style.setProperty('--rot-offset', off.toFixed(3));
       c.style.setProperty('--rot-abs', Math.abs(off).toFixed(3));
       c.style.zIndex = String(10 - Math.round(Math.abs(off)));
-      c.setAttribute('aria-hidden', Math.abs(off) < .5 ? 'false' : 'true');
+      c.setAttribute('aria-current', Math.abs(off) < .5 ? 'true' : 'false');
     });
   };
 
@@ -85,7 +85,20 @@ function rotBindDrag(vp) {
   };
   vp.addEventListener('pointerup', end);
   vp.addEventListener('pointercancel', end);
-  /* Un arrastre no debe activar el enlace de la tarjeta. */
-  vp.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  /* Click / Enter sobre una tarjeta:
+       - si es la que está en medio, el enlace navega a su sección;
+       - si es una lateral, el carrusel gira para traerla al centro;
+       - si el gesto fue un arrastre, no hace nada. */
+  vp.addEventListener('click', e => {
+    if (moved) { e.preventDefault(); e.stopPropagation(); return; }
+    const card = e.target.closest ? e.target.closest('.rotator-card') : null;
+    if (!card) return;
+    const i = rotatorCards.indexOf(card);
+    if (i === -1 || i === rotIndex) return;
+    e.preventDefault();
+    e.stopPropagation();
+    rotGo(i);
+    rotStart();
+  }, true);
 }
 if (rotatorCards.length) { if (rotatorDots) { rotatorCards.forEach((_, i) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Seccion ' + (i + 1)); b.addEventListener('click', () => { rotGo(i); rotStart(); }); rotatorDots.appendChild(b); }); } rotUpdate(); rotStart(); const vp = document.getElementById('rotatorViewport'); if (vp) { vp.addEventListener('mouseenter', () => { rotOver = true; rotStop(); }); vp.addEventListener('mouseleave', () => { rotOver = false; rotStart(); }); rotBindDrag(vp); } }

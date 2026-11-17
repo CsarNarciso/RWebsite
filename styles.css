@@ -1557,6 +1557,7 @@ summary {
     max-width: 800px
 }
 
+/* Pro Plus (inicio): cabecera de la sección + imagen + ficha, en una sola fila. */
 .device-section {
     --device-blue: #0b6ff0;
     --device-blue-dark: #0753bf;
@@ -1568,6 +1569,38 @@ summary {
     background: #fff;
     border-bottom: 1px solid #e7edec;
     scroll-margin-top: 96px
+}
+
+.device-section--intro {
+    grid-template-columns: minmax(280px, .95fr) minmax(0, 1.6fr) minmax(310px, 1.05fr);
+    gap: 36px;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 84px;
+    padding-bottom: 84px
+}
+
+.device-section--intro .devices-intro {
+    padding: 0
+}
+
+.device-section--intro .devices-intro .eyebrow {
+    margin: 0 0 20px
+}
+
+.device-section--intro .devices-intro h2 {
+    font-size: clamp(26px, 2vw, 30px);
+    line-height: 1.08;
+    letter-spacing: -.035em;
+    max-width: none
+}
+
+.device-section--intro .device-copy h2 {
+    font-size: clamp(38px, 4.4vw, 64px)
+}
+
+.device-section--intro .device-subtitle {
+    font-size: clamp(22px, 2.5vw, 36px)
 }
 
 .device-art {
@@ -1716,6 +1749,22 @@ summary {
     .device-section {
         gap: 40px;
         padding: 60px 6%
+    }
+
+    /* Pro Plus: en pantallas estrechas la fila de 3 se apila */
+    .device-section--intro {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-top: 56px;
+        padding-bottom: 56px
+    }
+
+    .device-section--intro .devices-intro h2 {
+        font-size: clamp(32px, 4.6vw, 52px)
+    }
+
+    .device-section--intro .device-copy h2 {
+        font-size: clamp(40px, 6vw, 68px)
     }
 
     .device-art img {
@@ -2574,47 +2623,61 @@ summary {
 .pd-cta { display: flex; align-items: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
 .pd-cta .button { background: var(--reg-oscuro); color: #fff; }
 .pd-cta .button:hover { background: var(--reg-azul); }
-/* Caracteristicas dentro de la banda oscura (antes seccion blanca aparte) */
-.pd-band-list-title {
+/* "Lo que incluye": franja propia al pie de la banda oscura */
+.pd-band-reverse .pd-band-copy { grid-column: 1; grid-row: 1; }
+.pd-band-reverse .pd-band-media { grid-column: 2; grid-row: 1; }
+
+.pd-band-feats {
+    grid-column: 1 / 1;
+    grid-row: 2;
+    margin-top: 46px;
+    padding-top: 26px;
+    border-top: 1px solid rgba(255, 255, 255, .16);
+    gap: 26px;
+    align-items: start;
+}
+
+.pd-band-feats-title {
     font-size: 11px;
     letter-spacing: 2px;
     font-weight: 600;
     text-transform: uppercase;
     color: #fff;
-    opacity: .75;
-    margin: 26px 0 12px;
+    opacity: .7;
+    margin: 0;
 }
 
-.pd-band-list {
+.pd-band-feats-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 10px;
-    max-width: 440px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px 30px;
 }
 
-.pd-band-list li {
+.pd-band-feats-list li {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    font-size: .95rem;
-    line-height: 1.45;
-    color: #d8ecec;
+    gap: 9px;
+    font-size: .85rem;
+    line-height: 1.4;
+    color: #cfe6e6;
 }
 
-.pd-band-list li::before {
+.pd-band-feats-list li::before {
     content: "✓";
     flex-shrink: 0;
-    width: 22px;
-    height: 22px;
+    width: 19px;
+    height: 19px;
     border-radius: 50%;
-    background: var(--mint);
-    color: var(--ink);
+    background: rgba(101, 218, 199, .14);
+    border: 1px solid rgba(101, 218, 199, .45);
+    color: var(--mint);
     display: grid;
     place-items: center;
     font-weight: 700;
-    font-size: .78rem;
+    font-size: .7rem;
 }
 @media (max-width: 900px) {
   .pd-hero-content { grid-template-columns: 1fr; gap: 36px; }
@@ -2645,4 +2708,7 @@ summary {
   .pd-band-reverse .pd-band-media { order: 0; }
   .pd-band-media img { max-height: 240px; }
   .pd-band { padding: 50px 0; }
+  .pd-band-reverse .pd-band-copy,
+  .pd-band-reverse .pd-band-media { grid-column: auto; grid-row: auto; }
+  .pd-band-feats { grid-row: auto; grid-template-columns: 1fr; gap: 14px; margin-top: 34px; padding-top: 22px; }
 }

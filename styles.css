@@ -302,7 +302,7 @@ h2 {
 .card-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform .4s
 }
 
@@ -1958,7 +1958,7 @@ summary {
 .product-media img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     opacity: 1;
     transition: transform var(--transicion), opacity var(--transicion);
 }
@@ -2298,7 +2298,7 @@ summary {
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     transition: transform .5s ease;
     -webkit-user-drag: none;
@@ -2478,7 +2478,7 @@ summary {
 .view-hero img {
     width: 100%;
     max-height: 380px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
 }
 
@@ -2579,18 +2579,18 @@ summary {
     z-index: 10;
 }
 /* ===== Vista de detalle de producto (3er nivel) ===== */
-.pd-hero { position: relative; isolation: isolate; min-height: 660px; height: min(760px, 76vh); background: var(--ink); overflow: hidden; display: flex; align-items: center; }
+.pd-hero { position: relative; isolation: isolate; min-height: 0; height: auto; background: var(--ink); overflow: hidden; display: flex; align-items: center; }
 .pd-hero-photo { position: absolute; inset: 0; height: auto; z-index: 0; }
 .pd-hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 54%; }
 .pd-hero-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,28,33,.92) 0%, rgba(6,28,33,.77) 27%, rgba(6,28,33,.42) 54%, rgba(6,28,33,.12) 78%, rgba(6,28,33,.02) 100%); }
-.pd-hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; padding: 70px 7%; color: #fff; max-width: 720px; }
+.pd-hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: flex-start; padding: 24px 7%; color: #fff; max-width: 720px; }
 .pd-hero .pd-tag { background: var(--mint); color: var(--ink); }
-.pd-hero .pd-section { font-size: 13px; letter-spacing: 3px; margin: 0 0 32px; color: var(--mint); font-weight: 700; text-transform: uppercase; }
-.pd-hero .pd-title { font-size: clamp(48px, 7vw, 96px); font-weight: 500; line-height: 1.01; letter-spacing: -.055em; margin: 0 0 24px; color: #fff; }
+.pd-hero .pd-section { font-size: 13px; letter-spacing: 3px; margin: 0 0 16px; color: var(--mint); font-weight: 700; text-transform: uppercase; }
+.pd-hero .pd-title { font-size: clamp(48px, 7vw, 96px); font-weight: 500; line-height: 1.01; letter-spacing: -.055em; margin: 0 0 16px; color: #fff; }
 .pd-hero .pd-title em { font-style: normal; color: var(--mint); }
-.pd-hero .pd-lead { font-size: clamp(20px, 2.2vw, 28px); color: #e8f7f7; margin: 0 0 18px; font-weight: 400; }
-.pd-hero .pd-desc { font-size: 16px; color: #cfe8e8; line-height: 1.6; max-width: 52ch; margin: 0 0 24px; }
-.pd-hero .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.pd-hero .pd-lead { font-size: clamp(20px, 2.2vw, 28px); color: #e8f7f7; margin: 0 0 8px; font-weight: 400; }
+.pd-hero .pd-desc { font-size: 16px; color: #cfe8e8; line-height: 1.5; max-width: 52ch; margin: 0 0 12px; }
+.pd-hero .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .pd-hero .pd-chip { font-size: 0.8rem; font-weight: 600; color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 6px 14px; }
 .pd-hero .pd-cta { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .pd-hero .pd-cta .button { background: var(--mint); color: var(--ink); font-size: 16px; padding: 16px 24px; }
@@ -2681,13 +2681,13 @@ summary {
 }
 @media (max-width: 900px) {
   .pd-hero-content { grid-template-columns: 1fr; gap: 36px; }
-  .pd-hero { min-height: 520px; }
+  .pd-hero { min-height: 0; }
   .pd-hero-media .pd-main-img img { height: 320px; }
   .pd-main-img img { height: 320px; }
   .pd-title { font-size: 2.2rem; }
 }
 @media (max-width: 560px) {
-  .pd-hero { min-height: 460px; padding: 40px 0 50px; }
+  .pd-hero { min-height: 0; padding: 40px 0 50px; }
   .pd-hero-media .pd-main-img img { height: 260px; }
   .pd-main-img img { height: 260px; }
   .pd-thumb img { width: 56px; height: 56px; }

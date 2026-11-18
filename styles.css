@@ -593,6 +593,53 @@ summary span {
     overflow: hidden
 }
 
+.contact {
+    background: var(--ink);
+    color: white
+}
+
+.contact .eyebrow {
+    color: var(--mint)
+}
+
+.contact h2 {
+    color: white
+}
+
+.contact p:not(.eyebrow) {
+    color: #c3d6d4;
+    font-size: 16px;
+    max-width: 560px
+}
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+    align-items: center;
+    margin-top: 24px
+}
+
+.contact-link {
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #ffffff40;
+    padding-bottom: 2px;
+    font-size: 16px
+}
+
+.contact-link:hover {
+    color: var(--mint);
+    border-color: var(--mint)
+}
+
+.wa-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: -3px;
+    margin-right: 6px
+}
+
 .catalog .eyebrow {
     color: var(--mint)
 }
@@ -605,7 +652,6 @@ summary span {
 .light {
     background: var(--mint);
     color: var(--ink);
-    margin-top: 15px
 }
 
 .light:hover {
@@ -1325,6 +1371,11 @@ summary {
     padding-bottom: 75px
 }
 
+.contact {
+    padding-top: 75px;
+    padding-bottom: 75px
+}
+
 @media(min-width:1600px) {
 
     .hero-copy,
@@ -1537,7 +1588,8 @@ summary {
         font-size: 18px
     }
 
-    .catalog h2 {
+    .catalog h2,
+    .contact h2 {
         font-size: 40px
     }
 

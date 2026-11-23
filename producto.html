@@ -3,19 +3,16 @@
 <body><div class="topline"><span>INGENIERÍA PARA EL ENTORNO HOSPITALARIO</span></div>
 <header><a href="index.html#inicio" aria-label="Regamsa Medical, inicio"><img class="logo" src="assets/Logo%20Empresa.png" alt="Regamsa Medical"></a><button class="menu" aria-expanded="false" aria-controls="nav">Menú <span>☰</span></button><nav id="nav"><a href="index.html#soluciones">Soluciones</a><a href="index.html#nosotros">Nosotros</a><a class="nav-cta" href="index.html#catalogo">Explorar catálogo <span>→</span></a></nav></header>
 <main id="product-detail">
-  <section class="pd-hero">
-    <div class="pd-hero-photo"><img id="pd-hero-photo" src="" alt=""></div>
-    <div class="pd-hero-overlay"></div>
-    <div class="wrap pd-hero-copy">
-      <span class="pd-tag" id="pd-tag"></span>
+  <section class="device-section device-reverse" id="product-hero" aria-labelledby="pd-title">
+    <div class="device-art">
+      <img id="pd-hero-photo" src="" alt="">
+    </div>
+    <div class="device-copy">
       <p class="pd-section" id="pd-section"></p>
       <h1 class="pd-title" id="pd-title"></h1>
-      <p class="pd-lead" id="pd-lead"></p>
-      <p class="pd-desc" id="pd-desc"></p>
-      <div class="pd-chips" id="pd-chips"></div>
-      <div class="pd-cta">
-        <a class="button" href="index.html#contacto">Cotizar ahora →</a>
-        <a class="btn-link pd-back-link" id="pd-back" href="#">← Volver a la línea</a>
+      <div class="device-actions pd-cta">
+        <a class="device-btn device-btn-solid" href="index.html#contacto">Cotizar ahora →</a>
+        <a class="device-btn device-btn-ghost pd-back-link" id="pd-back" href="#">← Volver a la línea</a>
       </div>
     </div>
   </section>
@@ -31,9 +28,9 @@
     <div class="wrap pd-band-grid">
       <div class="pd-band-media"><img id="pd-band-img1" src="" alt=""></div>
       <div class="pd-band-copy">
-        <p class="pd-band-eyebrow">Ingeniería hospitalaria</p>
-        <h2 class="pd-band-title">Diseñado para el entorno clínico.</h2>
-        <p class="pd-band-text">Equipamiento que integra ingeniería y cuidado, con acabados y componentes pensados para las exigencias del ambiente hospitalario.</p>
+        <p class="pd-band-eyebrow" id="pd-band-eyebrow1"></p>
+        <h2 class="pd-band-title" id="pd-band-title1"></h2>
+        <p class="pd-band-text" id="pd-band-text1"></p>
       </div>
     </div>
   </section>
@@ -41,9 +38,9 @@
     <div class="wrap pd-band-grid">
       <div class="pd-band-media"><img id="pd-band-img2" src="" alt=""></div>
       <div class="pd-band-copy">
-        <p class="pd-band-eyebrow">Monitoreo continuo</p>
-        <h2 class="pd-band-title">Cada conexión. Una vida.</h2>
-        <p class="pd-band-text">Supervisión en tiempo real, señalización audiovisual inmediata y salidas de integración para sistemas externos de supervisión.</p>
+        <p class="pd-band-eyebrow" id="pd-band-eyebrow2"></p>
+        <h2 class="pd-band-title" id="pd-band-title2"></h2>
+        <div class="pd-chips" id="pd-chips"></div>
         <div class="pd-band-feats">
         <ul class="pd-band-feats-list" id="pd-features"></ul>
       </div>
@@ -59,11 +56,13 @@
   const p = (window.PRODUCTS||{})[id];
   if(!p){ document.getElementById('product-detail').innerHTML = '<div class="wrap"><p style="padding:60px 0">Producto no encontrado.</p><a class="btn-link" href="index.html">← Volver</a></div>'; return; }
   document.title = 'Regamsa Medical — ' + p.name;
-  document.getElementById('pd-tag').textContent = p.tag;
   document.getElementById('pd-section').textContent = p.section;
   document.getElementById('pd-title').textContent = p.name;
-  document.getElementById('pd-lead').textContent = p.lead;
-  document.getElementById('pd-desc').textContent = p.description;
+  const be1 = document.getElementById('pd-band-eyebrow1'); if(be1) be1.textContent = p.section;
+  const bt1 = document.getElementById('pd-band-title1'); if(bt1) bt1.textContent = p.lead;
+  const bx1 = document.getElementById('pd-band-text1'); if(bx1) bx1.textContent = p.description;
+  const be2 = document.getElementById('pd-band-eyebrow2'); if(be2) be2.textContent = 'Especificaciones';
+  const bt2 = document.getElementById('pd-band-title2'); if(bt2) bt2.textContent = 'Detalles técnicos';
   const main = document.getElementById('pd-main');
   main.src = p.images[0];
   main.alt = p.name;

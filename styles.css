@@ -1780,7 +1780,8 @@ summary {
     min-width: 0
 }
 
-.device-copy h2 {
+.device-copy h2,
+.device-copy h1 {
     margin: 0;
     font-size: clamp(46px, 6vw, 92px);
     font-weight: 700;
@@ -1857,6 +1858,9 @@ summary {
     max-width: 100%;
     max-height: 520px
 }
+
+.device-section .pd-chips { justify-content: center; }
+.device-section .pd-cta { justify-content: center; }
 
 #device-analog-title {
     font-size: clamp(38px, 4.6vw, 74px)
@@ -2748,7 +2752,7 @@ summary {
 .pd-lead { font-size: 1.35rem; color: var(--reg-oscuro); font-weight: 600; margin: 0; }
 .pd-desc { font-size: 1.05rem; color: var(--texto-suave); line-height: 1.7; margin: 0; max-width: 52ch; }
 .pd-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
-.pd-chip { font-size: 0.8rem; font-weight: 600; color: var(--texto); background: var(--fondo-alt); border: 1px solid var(--linea); border-radius: 999px; padding: 6px 14px; }
+.pd-chip { font-size: 0.8rem; font-weight: 600; color: var(--texto); background: #b4f9f9; border: 1px solid var(--linea); border-radius: 999px; padding: 6px 14px; }
 .pd-cta { display: flex; align-items: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
 .pd-cta .button { background: var(--reg-oscuro); color: #fff; }
 .pd-cta .button:hover { background: var(--reg-azul); }
